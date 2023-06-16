@@ -12,7 +12,7 @@ export class Game extends Engine {
     startGame() {
         console.log("start de game!")
 
-        Resources.City.addTiledMapToScene(this.currentScene);
+        Resources.Map.addTiledMapToScene(this.currentScene);
         this.currentScene.camera.zoom = 2;
 
         const fish = new Actor()
