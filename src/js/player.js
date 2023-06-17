@@ -61,7 +61,10 @@ export class Player extends Actor {
     onPreUpdate(engine) {
         let xspeed = 0
 
-        if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
+        if ((engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            xspeed = 100
+            this.graphics.use('crouchright')
+        } else if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
             xspeed = -300
             this.graphics.use('walkleft')
 
