@@ -1,17 +1,13 @@
-import {
-    Actor,
-    SpriteSheet,
-    Vector,
-    Input,
-    Animation,
-    range,
-} from "excalibur";
-import {Resources} from "./resources.js";
-
+import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
+import { Resources } from "./resources.js";
+import { Inventory } from "./inventory.js"
+import { Item } from "./item.js"
 
 export class Player extends Actor {
+    inventory
+
     constructor() {
-        super({width: Resources.Player.width, height: Resources.Player.height});
+        super({width: 500, height: 750});
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.scale = new Vector(0.15, 0.15)
         const walkSheet = SpriteSheet.fromImageSource({
@@ -39,25 +35,23 @@ export class Player extends Actor {
     }
 
     onInitialize(engine) {
-        this.pos = new Vector(200, 450);
+        this.inventory = new Inventory();
+        this.pos = new Vector(35, 545);
         this.vel = new Vector(0, 0);
 
-        this.on('collisionstart', (event) => this.hitSomething(event, engine))
+        this.on('collisionstart', (event) => this.hitSomething(event))
         this.graphics.use('idleright');
     }
 
-    // onPostUpdate(engine) {
-    //     if (engine.input.keyboard.wasPressed(Input.Keys.A) || engine.input.keyboard.wasPressed(Input.Keys.Left)) {
-    //         this.graphics.use('idleleft')
-    //     }
-    //     if (engine.input.keyboard.wasPressed(Input.Keys.D) || engine.input.keyboard.wasPressed(Input.Keys.Right)) {
-    //         this.graphics.use('idleright')
-    //     }
-    //     else {
-    //         this.graphics.use('idleright')
-    //     }
-    // }
-
+    hitSomething(event) {
+        if (event.other instanceof Item) {
+            // pak item op
+            this.inventory.addToInventory(event.other)
+            // zorg ervoor dat item verdwijnt na oppakken
+            event.other.kill()
+        }
+    }
+    
     onPreUpdate(engine) {
         let xspeed = 0
 
@@ -84,6 +78,4 @@ export class Player extends Actor {
         this.vel = new Vector(xspeed, 0)
 
     }
-
-
 }

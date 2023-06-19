@@ -1,19 +1,21 @@
 import '../css/style.css'
-import { Actor, Engine, Vector } from "excalibur"
-import {Player} from "./player.js";
-import { Resources, ResourceLoader } from './resources.js'
+import { Engine } from "excalibur"
+import { ResourceLoader } from './resources.js'
+import { Play } from "./play.js";
 
 export class Game extends Engine {
 
     constructor() {
         super({ width: 800, height: 600 })
+        this.showDebug(true)
+        this.debug.transform.showAll = true
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
     startGame() {
-        console.log("start de game!")
-        this.player = new Player();
-        this.add(this.player);
+        this.addScene('play', new Play())
+
+        this.goToScene('play')
     }
 }
 
