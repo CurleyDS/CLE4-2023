@@ -37,7 +37,7 @@ export class Player extends Actor {
 
     onInitialize(engine) {
         this.inventory = new Inventory();
-        this.pos = new Vector(35, 545);
+        this.pos = new Vector(500, 595);
         this.vel = new Vector(0, 0);
 
         this.on('collisionstart', (event) => this.hitSomething(event))

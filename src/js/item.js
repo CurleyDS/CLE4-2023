@@ -15,6 +15,6 @@ export class Item extends Actor {
         this.sprite = Resources.Item.toSprite()
         this.graphics.use(this.sprite)
 
-        this.pos = new Vector(400, 575)
+        this.pos = new Vector(700, 575)
     }
 }

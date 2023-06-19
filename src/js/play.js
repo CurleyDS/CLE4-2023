@@ -2,6 +2,7 @@ import { Scene, Actor, Engine, Vector } from "excalibur"
 import { Resources } from './resources.js'
 import { Player } from "./player.js";
 import { Item } from "./item.js";
+import { Background } from "./background.js";
 
 export class Play extends Scene {
     game
@@ -15,6 +16,10 @@ export class Play extends Scene {
     }
 
     onActivate(ctx) {
+
+        this.background = new Background();
+        this.add(this.background);
+
         this.player = new Player();
         this.add(this.player);
 
