@@ -1,9 +1,10 @@
-import { Scene, Actor, Engine, Vector } from "excalibur"
+import { Scene, Actor, Engine, Physics, Vector } from "excalibur"
 import { Resources } from './resources.js'
 import { Player } from "./player.js";
+import { Glint } from "./glint.js";
 import { Item } from "./item.js";
 import { Background } from "./background.js";
-import { Glint } from "./glint.js";
+import { Platform } from "./platform.js";
 
 
 export class Play extends Scene {
@@ -11,6 +12,8 @@ export class Play extends Scene {
 
     constructor() {
         super()
+        Physics.useArcadePhysics()
+        Physics.gravity = new Vector(0, 800)
     }
 
     onInitialize(engine) {
@@ -22,9 +25,14 @@ export class Play extends Scene {
         this.background = new Background();
         this.add(this.background);
 
+        this.platform = new Platform();
+        this.add(this.platform);
+
         this.player = new Player();
         this.add(this.player);
 
+        this.glint = new Glint()
+        this.add(this.glint);
 
         this.item = new Item("item");
         this.add(this.item);

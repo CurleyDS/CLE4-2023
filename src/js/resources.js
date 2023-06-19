@@ -1,9 +1,9 @@
 import { ImageSource, Sound, Resource, Loader } from 'excalibur'
 import { TiledMapResource } from '@excaliburjs/plugin-tiled'
+import background from '../images/background.png'
 import playerCharacter from '../images/spritesheet-player-character.png'
-import itemObject from '../images/item-object.png'
-import background from '../images/test.png'
 import glint from '../images/blue-flame.png'
+import itemObject from '../images/item-object.png'
 
 
 const Resources = {

@@ -45,9 +45,6 @@ export class Player extends Actor {
 
         this.on('collisionstart', (event) => this.hitSomething(event))
         this.graphics.use('idleright');
-
-        engine.currentScene.add(new Glint());
-
     }
 
 
