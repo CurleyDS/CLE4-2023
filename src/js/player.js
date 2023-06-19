@@ -2,9 +2,11 @@ import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
 import { Resources } from "./resources.js";
 import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
+import {Glint} from "./Glint.js";
 
 export class Player extends Actor {
     inventory
+    game
 
     constructor() {
         super({width: 500, height: 750});
@@ -36,22 +38,31 @@ export class Player extends Actor {
     }
 
     onInitialize(engine) {
+        this.game = engine;
         this.inventory = new Inventory();
         this.pos = new Vector(500, 595);
         this.vel = new Vector(0, 0);
 
         this.on('collisionstart', (event) => this.hitSomething(event))
         this.graphics.use('idleright');
+
+        engine.currentScene.add(new Glint());
+
     }
+
 
     hitSomething(event) {
         if (event.other instanceof Item) {
-            // pak item op
-            this.inventory.addToInventory(event.other)
-            // zorg ervoor dat item verdwijnt na oppakken
-            event.other.kill()
+            if ((this.game.input.keyboard.isHeld(Input.Keys.E))){
+                // pak item op
+                this.inventory.addToInventory(event.other)
+                // zorg ervoor dat item verdwijnt na oppakken
+                event.other.kill()
+            }
         }
     }
+
+
     
     onPreUpdate(engine) {
         let xspeed = 0
@@ -77,6 +88,7 @@ export class Player extends Actor {
         }
 
         this.vel = new Vector(xspeed, 0)
+
 
     }
 }

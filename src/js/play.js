@@ -3,6 +3,8 @@ import { Resources } from './resources.js'
 import { Player } from "./player.js";
 import { Item } from "./item.js";
 import { Background } from "./background.js";
+import { Glint } from "./glint.js";
+
 
 export class Play extends Scene {
     game
@@ -22,6 +24,7 @@ export class Play extends Scene {
 
         this.player = new Player();
         this.add(this.player);
+
 
         this.item = new Item("item");
         this.add(this.item);
