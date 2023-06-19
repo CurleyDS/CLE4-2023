@@ -35,7 +35,8 @@ export class Glint extends Actor {
     onInitialize(engine) {
         this.vel = new Vector(0, 0);
         this.graphics.use("idle");
-        this.pos = new Vector(engine.currentScene.player.pos.x - 100, engine.currentScene.player.pos.y -100);
+        this.pos = new Vector(engine.currentScene.player.pos.x, engine.currentScene.player.pos.y - 20)
+        this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
     }
 
@@ -44,28 +45,35 @@ export class Glint extends Actor {
         if (engine.input.keyboard.isHeld(Input.Keys.Key1)) {
             this.graphics.use('idle')
             this.scale = new Vector(0.25, 0.25)
+            this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key2)) {
             this.graphics.use('shocked')
             this.scale = new Vector(0.3, 0.3)
+            this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key3)) {
             this.graphics.use('sad1')
             this.scale = new Vector(0.25, 0.25)
+            this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key4)) {
             this.graphics.use('thinking')
             this.scale = new Vector (0.4, 0.4);
+            this.anchor = new Vector(0.5,1.5)
+
         }
 
         if (engine.input.keyboard.isHeld(Input.Keys.Key5)) {
             this.graphics.use('angry')
             this.scale = new Vector (0.30, 0.30);
+            this.anchor = new Vector(0.5,2)
         }
 
         if (engine.input.keyboard.isHeld(Input.Keys.Key6)) {
             this.graphics.use('sad2')
             this.scale = new Vector (0.25, 0.25);
+            this.anchor = new Vector(0.5,2)
         }
 
     }
