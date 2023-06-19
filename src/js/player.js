@@ -1,11 +1,13 @@
 import { Actor, SpriteSheet, Vector, Input, Animation, CollisionType, range } from "excalibur";
 import { Resources } from "./resources.js";
+import { Platform } from "./platform.js";
 import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
 
 export class Player extends Actor {
-    inventory
     game
+    inventory
+    grounded
 
     constructor() {
         super({width: 500, height: 750});
@@ -39,15 +41,22 @@ export class Player extends Actor {
         this.game = engine;
         this.inventory = new Inventory();
         this.pos = new Vector(500, 595);
-        this.body.mass = 7
-        // this.vel = new Vector(0, 0);
 
         this.on('collisionstart', (event) => this.hitSomething(event))
+        this.on('precollision', (event) => this.touchSomething(event))
+        this.on('collisionend', (event) => this.detachSomething(event))
         this.graphics.use('idleright');
     }
 
-
     hitSomething(event) {
+        // wanneer de speler door iets wordt geraakt
+        if (event.other instanceof Platform) {
+            this.grounded = true
+        }
+    }
+
+    touchSomething(event) {
+        // wanneer de speler iets aanraakt
         if (event.other instanceof Item) {
             if ((this.game.input.keyboard.isHeld(Input.Keys.E))){
                 // pak item op
@@ -58,16 +67,25 @@ export class Player extends Actor {
         }
     }
 
-
+    detachSomething(event) {
+        // wanneer de speler stopt met iets aanraken
+        if (event.other instanceof Platform) {
+            this.game.clock.schedule(() => {
+                this.grounded = false
+            }, 300)
+        }
+    }
     
     onPreUpdate(engine) {
         let xspeed = 0
         let yspeed = 0
 
-        if ((engine.input.keyboard.isHeld(Input.Keys.Space))) {
-            yspeed = -400
+        if (this.grounded) {
+            if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
+                yspeed = -600
+            }
         }
-        
+
         if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
             xspeed = -300
             this.graphics.use('walkleft')
