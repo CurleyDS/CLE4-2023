@@ -12,8 +12,6 @@ export class Glint extends Actor {
             image: Resources.Glint,
             grid: {rows: 3, columns: 4, spriteWidth: 250, spriteHeight: 250},
         });
-        // test of alle sprites er zijn
-        console.log(flySheet.sprites);
 
         const idle = Animation.fromSpriteSheet(flySheet, range(0, 1), 250);
         const sad1 = Animation.fromSpriteSheet(flySheet, range(2, 3), 250);

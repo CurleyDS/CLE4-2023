@@ -17,7 +17,5 @@ export class Inventory {
             // voeg nieuwe item toe
             this.items.push(item)
         }
-        // test of item is toegevoegd
-        console.log(this.items)
     }
 }

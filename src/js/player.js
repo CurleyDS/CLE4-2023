@@ -1,8 +1,7 @@
-import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
+import { Actor, SpriteSheet, Vector, Input, Animation, CollisionType, range } from "excalibur";
 import { Resources } from "./resources.js";
 import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
-import {Glint} from "./Glint.js";
 
 export class Player extends Actor {
     inventory
@@ -10,14 +9,13 @@ export class Player extends Actor {
 
     constructor() {
         super({width: 500, height: 750});
+        this.body.collisionType = CollisionType.Active
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.scale = new Vector(0.15, 0.15)
         const walkSheet = SpriteSheet.fromImageSource({
             image: Resources.Player,
             grid: {rows: 8, columns: 3, spriteWidth: 500, spriteHeight: 750},
         });
-        // test of alle sprites er zijn
-        console.log(walkSheet.sprites);
 
         const walkRight = Animation.fromSpriteSheet(walkSheet, range(3, 4), 200);
         const walkLeft = Animation.fromSpriteSheet(walkSheet, range(15, 16), 200);
@@ -41,7 +39,8 @@ export class Player extends Actor {
         this.game = engine;
         this.inventory = new Inventory();
         this.pos = new Vector(500, 595);
-        this.vel = new Vector(0, 0);
+        this.body.mass = 7
+        // this.vel = new Vector(0, 0);
 
         this.on('collisionstart', (event) => this.hitSomething(event))
         this.graphics.use('idleright');
@@ -63,29 +62,42 @@ export class Player extends Actor {
     
     onPreUpdate(engine) {
         let xspeed = 0
+        let yspeed = 0
 
-        if ((engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
-            xspeed = 100
-            this.graphics.use('crouchright')
-        } else if ((engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
-            xspeed = -100
-            this.graphics.use('crouchleft')
-        } else if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
+        if ((engine.input.keyboard.isHeld(Input.Keys.Space))) {
+            yspeed = -400
+        }
+        
+        if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
             xspeed = -300
             this.graphics.use('walkleft')
 
-        } else if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
+        }
+        
+        if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
             xspeed = 300
             this.graphics.use('walkright')
 
-        } else if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
+        }
+        
+        if ((engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            xspeed = 100
+            this.graphics.use('crouchright')
+        }
+        
+        if ((engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            xspeed = -100
+            this.graphics.use('crouchleft')
+        }
+        
+        if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
             this.graphics.use('idleleft');
-        } else if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
+        }
+        
+        if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
             this.graphics.use('idleright');
         }
 
-        this.vel = new Vector(xspeed, 0)
-
-
+        this.vel = new Vector(xspeed, yspeed)
     }
 }

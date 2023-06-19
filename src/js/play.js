@@ -13,7 +13,7 @@ export class Play extends Scene {
     constructor() {
         super()
         Physics.useArcadePhysics()
-        Physics.gravity = new Vector(0, 800)
+        Physics.gravity = new Vector(0, 8000)
     }
 
     onInitialize(engine) {
