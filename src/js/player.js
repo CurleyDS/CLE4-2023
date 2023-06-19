@@ -18,11 +18,12 @@ export class Player extends Actor {
         console.log(walkSheet.sprites);
 
         const walkRight = Animation.fromSpriteSheet(walkSheet, range(3, 4), 200);
-        const walkLeft = Animation.fromSpriteSheet(walkSheet, range(16, 17), 200);
+        const walkLeft = Animation.fromSpriteSheet(walkSheet, range(15, 16), 200);
         const idleRight = Animation.fromSpriteSheet(walkSheet, range(0, 2), 150);
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(12, 14), 150);
         const crouchRight = Animation.fromSpriteSheet(walkSheet, range(6, 9), 150);
-        const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(5, 6), 150);
+        const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(18, 21), 150);
+
 
         this.graphics.add("walkright", walkRight);
         this.graphics.add("walkleft", walkLeft);
@@ -58,6 +59,9 @@ export class Player extends Actor {
         if ((engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
             xspeed = 100
             this.graphics.use('crouchright')
+        } else if ((engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            xspeed = -100
+            this.graphics.use('crouchleft')
         } else if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
             xspeed = -300
             this.graphics.use('walkleft')
@@ -66,9 +70,6 @@ export class Player extends Actor {
             xspeed = 300
             this.graphics.use('walkright')
 
-        } else if ((engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) && engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
-            xspeed = 100
-            this.graphics.use('crouchright')
         } else if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
             this.graphics.use('idleleft');
         } else if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
