@@ -5,6 +5,8 @@ import { Glint } from "./glint.js";
 import { Item } from "./item.js";
 import { Background } from "./background.js";
 import { Platform } from "./platform.js";
+import { Enemy } from "./enemy.js";
+
 
 
 export class Play extends Scene {
@@ -36,5 +38,8 @@ export class Play extends Scene {
 
         this.item = new Item("item");
         this.add(this.item);
+
+        this.enemy = new Enemy();
+        this.add(this.enemy);
     }
 }

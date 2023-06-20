@@ -38,10 +38,8 @@ export class Player extends Actor {
         this.graphics.add("idleleft", idleLeft);
         this.graphics.add("jumpright", jumpRight);
         this.graphics.add("jumpleft", jumpLeft);
-
-
-
     }
+
 
     onInitialize(engine) {
         this.game = engine;
