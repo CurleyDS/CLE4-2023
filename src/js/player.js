@@ -8,6 +8,7 @@ export class Player extends Actor {
     game
     inventory
     grounded
+    jumped
 
     constructor() {
         super({width: 500, height: 750});
@@ -52,6 +53,7 @@ export class Player extends Actor {
         // wanneer de speler door iets wordt geraakt
         if (event.other instanceof Platform) {
             this.grounded = true
+            this.jumped = false
         }
     }
 
@@ -70,6 +72,7 @@ export class Player extends Actor {
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
         if (event.other instanceof Platform) {
+            this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
             }, 300)
@@ -80,7 +83,7 @@ export class Player extends Actor {
         let xspeed = 0
         let yspeed = 0
 
-        if (this.grounded) {
+        if (this.grounded || !this.jumped) {
             if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
                 yspeed = -600
             }
