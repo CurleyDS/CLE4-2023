@@ -27,16 +27,20 @@ export class Player extends Actor {
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(12, 14), 150);
         const crouchRight = Animation.fromSpriteSheet(walkSheet, range(6, 9), 150);
         const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(18, 21), 150);
+        const crouchIdleRight = Animation.fromSpriteSheet(walkSheet, range(6, 6), 150);
+        const crouchIdleLeft = Animation.fromSpriteSheet(walkSheet, range(18, 18), 150);
         const jumpRight = Animation.fromSpriteSheet(walkSheet, range(10, 10), 200);
         const jumpLeft = Animation.fromSpriteSheet(walkSheet, range(22, 22), 200);
 
 
         this.graphics.add("walkright", walkRight);
         this.graphics.add("walkleft", walkLeft);
-        this.graphics.add("crouchright", crouchRight);
-        this.graphics.add("crouchleft", crouchLeft);
         this.graphics.add("idleright", idleRight);
         this.graphics.add("idleleft", idleLeft);
+        this.graphics.add("crouchright", crouchRight);
+        this.graphics.add("crouchleft", crouchLeft);
+        this.graphics.add("crouchIdleright", crouchIdleRight);
+        this.graphics.add("crouchIdleleft", crouchIdleLeft);
         this.graphics.add("jumpright", jumpRight);
         this.graphics.add("jumpleft", jumpLeft);
     }
@@ -55,7 +59,6 @@ export class Player extends Actor {
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
         if (event.other instanceof Platform) {
-            console.log('landed')
             this.grounded = true
             this.jumped = false
         }
@@ -76,11 +79,9 @@ export class Player extends Actor {
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
         if (event.other instanceof Platform) {
-            console.log('jumped');
             this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
-                console.log('falling');
             }, 300)
         }
     }
@@ -101,6 +102,12 @@ export class Player extends Actor {
 
         // crouching/hiding
         if (engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            if (this.currentGraphic == 'idleleft') {
+                this.currentGraphic = 'crouchIdleleft'
+            }
+            if (this.currentGraphic == 'idleright') {
+                this.currentGraphic = 'crouchIdleright'
+            }
             if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                 xspeed = -100
                 this.currentGraphic = 'crouchleft'
@@ -109,13 +116,13 @@ export class Player extends Actor {
                 xspeed = 100
                 this.currentGraphic = 'crouchright'
             }
-            // Potential inputs for hiding
-            // if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
-            //     this.currentGraphic = 'hideleft'
-            // }
-            // if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
-            //     this.currentGraphic = 'hideright'
-            // }
+        } else {
+            if (this.currentGraphic == 'crouchIdleleft') {
+                this.currentGraphic = 'idleleft'
+            }
+            if (this.currentGraphic == 'crouchIdleright') {
+                this.currentGraphic = 'idleright'
+            }
         }
 
         // jumping
