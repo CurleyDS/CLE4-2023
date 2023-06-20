@@ -26,6 +26,8 @@ export class Player extends Actor {
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(12, 14), 150);
         const crouchRight = Animation.fromSpriteSheet(walkSheet, range(6, 9), 150);
         const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(18, 21), 150);
+        const jumpRight = Animation.fromSpriteSheet(walkSheet, range(10, 10), 200);
+        const jumpLeft = Animation.fromSpriteSheet(walkSheet, range(23, 23), 200);
 
 
         this.graphics.add("walkright", walkRight);
@@ -34,6 +36,9 @@ export class Player extends Actor {
         this.graphics.add("crouchleft", crouchLeft);
         this.graphics.add("idleright", idleRight);
         this.graphics.add("idleleft", idleLeft);
+        this.graphics.add("jumpright", jumpRight);
+        this.graphics.add("jumpleft", jumpLeft);
+
 
 
     }
@@ -41,7 +46,7 @@ export class Player extends Actor {
     onInitialize(engine) {
         this.game = engine;
         this.inventory = new Inventory();
-        this.pos = new Vector(500, 595);
+        this.pos = new Vector(500, 565);
 
         this.on('collisionstart', (event) => this.hitSomething(event))
         this.on('precollision', (event) => this.touchSomething(event))
@@ -86,9 +91,19 @@ export class Player extends Actor {
         let xspeed = 0
         let yspeed = 0
 
+        // jump right
         if (this.grounded || !this.jumped) {
-            if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
+            if (engine.input.keyboard.isHeld(Input.Keys.Space) && engine.input.keyboard.isHeld(Input.Keys.D)) {
                 yspeed = -600
+                this.graphics.use('jumpright');
+            }
+        }
+
+        // jump left
+        if (this.grounded || !this.jumped) {
+            if (engine.input.keyboard.isHeld(Input.Keys.Space) && engine.input.keyboard.isHeld(Input.Keys.A)) {
+                yspeed = -600
+                this.graphics.use('jumpleft');
             }
         }
 
