@@ -52,6 +52,7 @@ export class Player extends Actor {
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
         if (event.other instanceof Platform) {
+            console.log('landed')
             this.grounded = true
             this.jumped = false
         }
@@ -72,9 +73,11 @@ export class Player extends Actor {
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
         if (event.other instanceof Platform) {
+            console.log('jumped');
             this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
+                console.log('falling');
             }, 300)
         }
     }
