@@ -41,8 +41,8 @@ export class Player extends Actor {
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(12, 14), 150);
         const crouchRight = Animation.fromSpriteSheet(walkSheet, range(6, 9), 150);
         const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(18, 21), 150);
-        const crouchIdleRight = Animation.fromSpriteSheet(walkSheet, range(6, 6), 150);
-        const crouchIdleLeft = Animation.fromSpriteSheet(walkSheet, range(18, 18), 150);
+        const crouchIdleRight = Animation.fromSpriteSheet(walkSheet, range(5, 6), 150);
+        const crouchIdleLeft = Animation.fromSpriteSheet(walkSheet, range(17, 18), 150);
         const jumpRight = Animation.fromSpriteSheet(walkSheet, range(10, 10), 200);
         const jumpLeft = Animation.fromSpriteSheet(walkSheet, range(22, 22), 200);
 
