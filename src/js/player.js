@@ -1,4 +1,4 @@
-import { Actor, SpriteSheet, Vector, Input, Animation, CollisionType, range } from "excalibur";
+import { Actor, SpriteSheet, Vector, Input, Shape, Animation, CollisionType, range } from "excalibur";
 import { Resources } from "./resources.js";
 import { Platform } from "./platform.js";
 import { Inventory } from "./inventory.js"
@@ -10,12 +10,26 @@ export class Player extends Actor {
     currentGraphic
     grounded
     jumped
+    box
+    boxAnchor
+    x
+    y
 
-    constructor() {
+    constructor(x,y) {
         super({width: 500, height: 750});
+        this.boxAnchor = new Vector(0.5,0.40)
+        this.box = Shape.Box(500, 750, Vector.Half);
+        this.box2 = Shape.Box(500, 600, this.boxAnchor);
+
+        this.collider.set(this.box);
+
+        this.x = x
+        this.y = y
+
+
         this.body.collisionType = CollisionType.Active
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
-        this.scale = new Vector(0.15, 0.15)
+        this.scale = new Vector(0.12, 0.12)
         const walkSheet = SpriteSheet.fromImageSource({
             image: Resources.Player,
             grid: {rows: 8, columns: 3, spriteWidth: 500, spriteHeight: 750},
@@ -45,10 +59,12 @@ export class Player extends Actor {
         this.graphics.add("jumpleft", jumpLeft);
     }
 
+
+
     onInitialize(engine) {
         this.game = engine;
         this.inventory = new Inventory();
-        this.pos = new Vector(500, 565);
+        this.pos = new Vector(this.x, this.y)
 
         this.on('collisionstart', (event) => this.hitSomething(event))
         this.on('precollision', (event) => this.touchSomething(event))
@@ -59,6 +75,7 @@ export class Player extends Actor {
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
         if (event.other instanceof Platform) {
+            console.log('landed');
             this.grounded = true
             this.jumped = false
         }
@@ -79,9 +96,11 @@ export class Player extends Actor {
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
         if (event.other instanceof Platform) {
+            console.log('jumped');
             this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
+                console.log('falling');
             }, 300)
         }
     }
@@ -94,34 +113,49 @@ export class Player extends Actor {
         if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
             xspeed = -300
             this.currentGraphic = 'walkleft'
+            this.collider.set(this.box);
         }
         if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
             xspeed = 300
             this.currentGraphic = 'walkright'
+            this.collider.set(this.box);
+
         }
 
         // crouching/hiding
         if (engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
             if (this.currentGraphic == 'idleleft') {
                 this.currentGraphic = 'crouchIdleleft'
+                this.collider.set(this.box2);
             }
             if (this.currentGraphic == 'idleright') {
                 this.currentGraphic = 'crouchIdleright'
+                this.collider.set(this.box2);
+
             }
             if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                 xspeed = -100
                 this.currentGraphic = 'crouchleft'
+                this.collider.set(this.box2);
+
+
             }
             if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
                 xspeed = 100
                 this.currentGraphic = 'crouchright'
+                this.collider.set(this.box2);
+
             }
         } else {
             if (this.currentGraphic == 'crouchIdleleft') {
                 this.currentGraphic = 'idleleft'
+                this.collider.set(this.box);
+
             }
             if (this.currentGraphic == 'crouchIdleright') {
                 this.currentGraphic = 'idleright'
+                this.collider.set(this.box);
+
             }
         }
 
@@ -131,32 +165,47 @@ export class Player extends Actor {
                 yspeed = -600
                 if (this.currentGraphic == 'idleleft') {
                     this.currentGraphic = 'jumpleft'
+                    this.collider.set(this.box);
+
                 }
                 if (this.currentGraphic == 'idleright') {
                     this.currentGraphic = 'jumpright'
+                    this.collider.set(this.box);
+
                 }
                 if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                     this.currentGraphic = 'jumpleft'
+                    this.collider.set(this.box);
+
                 }
                 if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
                     this.currentGraphic = 'jumpright'
+                    this.collider.set(this.box);
+
                 }
             }
         } else {
             if (this.currentGraphic == 'jumpleft') {
                 this.currentGraphic = 'idleleft'
+                this.collider.set(this.box);
+
             }
             if (this.currentGraphic == 'jumpright') {
                 this.currentGraphic = 'idleright'
+                this.collider.set(this.box);
+
             }
         }
         
         // standing
         if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
             this.currentGraphic = 'idleleft'
+            this.collider.set(this.box);
+
         }
         if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
             this.currentGraphic = 'idleright'
+            this.collider.set(this.box);
         }
 
         this.vel = new Vector(xspeed, yspeed)

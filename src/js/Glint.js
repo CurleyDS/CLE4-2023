@@ -7,7 +7,7 @@ export class Glint extends Actor {
     constructor() {
         super({width: 250, height: 250});
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
-        this.scale = new Vector(0.25, 0.25)
+        this.scale = new Vector(0.2, 0.2)
         const flySheet = SpriteSheet.fromImageSource({
             image: Resources.Glint,
             grid: {rows: 3, columns: 4, spriteWidth: 250, spriteHeight: 250},
@@ -31,9 +31,8 @@ export class Glint extends Actor {
     }
 
     onInitialize(engine) {
-        this.vel = new Vector(0, 0);
         this.graphics.use("idle");
-        this.pos = new Vector(engine.currentScene.player.pos.x, engine.currentScene.player.pos.y - 20)
+        this.pos = new Vector(engine.currentScene.player.pos.x, engine.currentScene.player.pos.y + 60)
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
     }
@@ -42,35 +41,34 @@ export class Glint extends Actor {
     onPreUpdate(engine) {
         if (engine.input.keyboard.isHeld(Input.Keys.Key1)) {
             this.graphics.use('idle')
-            this.scale = new Vector(0.25, 0.25)
+            this.scale = new Vector(0.2, 0.2)
             this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key2)) {
             this.graphics.use('shocked')
-            this.scale = new Vector(0.3, 0.3)
+            this.scale = new Vector(0.2, 0.2)
             this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key3)) {
             this.graphics.use('sad1')
-            this.scale = new Vector(0.25, 0.25)
+            this.scale = new Vector(0.2, 0.2)
             this.anchor = new Vector(0.5,2)
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key4)) {
             this.graphics.use('thinking')
-            this.scale = new Vector (0.4, 0.4);
+            this.scale = new Vector (0.35, 0.30);
             this.anchor = new Vector(0.5,1.5)
-
         }
 
         if (engine.input.keyboard.isHeld(Input.Keys.Key5)) {
             this.graphics.use('angry')
-            this.scale = new Vector (0.30, 0.30);
+            this.scale = new Vector (0.2, 0.2);
             this.anchor = new Vector(0.5,2)
         }
 
         if (engine.input.keyboard.isHeld(Input.Keys.Key6)) {
             this.graphics.use('sad2')
-            this.scale = new Vector (0.25, 0.25);
+            this.scale = new Vector (0.20, 0.20);
             this.anchor = new Vector(0.5,2)
         }
 

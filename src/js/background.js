@@ -1,17 +1,22 @@
-import { Actor, Vector } from 'excalibur'
+import {Actor, ImageSource, Vector} from 'excalibur'
 import { Resources } from './resources.js'
 
 
 export class Background extends Actor {
+    backgroundImage;
 
-    offset
+    constructor(backgroundImage) {
+        super();
+        this.backgroundImage = backgroundImage;
+    }
 
     onInitialize(engine) {
-        const backgroundImage = Resources.Background.toSprite()
-        this.offset = backgroundImage.width
         this.graphics.anchor = new Vector(0, 0)
-        this.graphics.use(backgroundImage);
-
+        this.scale = new Vector(1, 1)
+        console.log(this.backgroundImage);
+        if(this.backgroundImage instanceof ImageSource) {
+            this.graphics.use(this.backgroundImage.toSprite())
+        }
     }
 }
 
