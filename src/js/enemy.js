@@ -1,11 +1,18 @@
-import {Actor, SpriteSheet, Vector, Input, Animation, range, CollisionType} from "excalibur";
+import { Actor, SpriteSheet, Vector, Input, Animation, CollisionType, range } from "excalibur";
 import { Resources } from "./resources.js";
-import { Player } from "./player.js";
+import { Platform } from "./platform.js";
+import { View } from "./view.js";
 
 export class Enemy extends Actor {
+    currentPosition
+    direction
+    aggro
 
     constructor() {
         super({width: 500, height: 750});
+        this.currentPosition = 0
+        this.direction = true
+        this.aggro = false
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.body.collisionType = CollisionType.Active
         this.scale = new Vector(0.17, 0.17)
@@ -21,50 +28,54 @@ export class Enemy extends Actor {
         const idleRight = Animation.fromSpriteSheet(walkSheet, range(0, 1), 400);
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(8, 9), 400);
 
-        // const jumpRight = walkSheet.sprites[10]
-        // const jumpLeft = walkSheet.sprites[23]
-
-
         this.graphics.add("walkright", walkRight);
         this.graphics.add("walkleft", walkLeft);
         this.graphics.add("angryright", angryRight);
         this.graphics.add("angryleft", angryLeft);
         this.graphics.add("idleright", idleRight);
         this.graphics.add("idleleft", idleLeft);
-
-
     }
 
     onInitialize(engine) {
-        this.vel = new Vector(0, 0);
-        this.graphics.use("idleright");
-        this.pos = new Vector(200, 300);
+        this.pos = new Vector(700, 550)
+        this.addChild(new View)
+        
+        this.on('precollision', (event) => this.touchSomething(event))
+        this.graphics.use("idleright")
     }
 
+    touchSomething(event) {
+        if (event.other instanceof Platform) {
+            this.currentPosition = (event.other.width - this.pos.x)
+        }
+    }
 
     onPreUpdate(engine) {
         let xspeed = 0
-        if (engine.input.keyboard.isHeld(Input.Keys.Key8)) {
-            this.graphics.use('walkright')
-            xspeed = 100
-        }
-        if (engine.input.keyboard.isHeld(Input.Keys.Key7)) {
-            this.graphics.use('walkleft')
-            xspeed = -100
-        }
-        if (engine.input.keyboard.isHeld(Input.Keys.Key0)) {
-            this.graphics.use('angryright')
-            xspeed = 200
+        
+        if (this.aggro) {
+            if (this.direction) {
+                this.graphics.use('angryright')
+                xspeed = 400
+            } else {
+                this.graphics.use('angryleft')
+                xspeed = -400
+            }
+        } else {
+            if (this.direction) {
+                this.graphics.use('walkright')
+                xspeed = 100
+            } else {
+                this.graphics.use('walkleft')
+                xspeed = -100
+            }
         }
 
-        if (engine.input.keyboard.isHeld(Input.Keys.Key9)) {
-            this.graphics.use('angryleft')
-            xspeed = -200
+        if (this.currentPosition < 0) {
+            this.direction = false
         }
-
-        if (engine.input.keyboard.isHeld(Input.Keys.Backspace)) {
-            this.graphics.use('idleleft')
-            xspeed = 0;
+        if (this.currentPosition > 1250) {
+            this.direction = true
         }
 
         this.vel = new Vector(xspeed, 0)

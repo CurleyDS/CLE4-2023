@@ -1,4 +1,4 @@
-import { ImageSource, Sound, Resource, Loader, Color } from 'excalibur'
+import { ImageSource, Sound, Resource, Loader } from 'excalibur'
 //tilemap doesn't work
 // import { TiledMapResource } from '@excaliburjs/plugin-tiled'
 import background from '../images/background.png'
@@ -7,7 +7,7 @@ import playerCharacter from '../images/spritesheet-player-character.png'
 import glint from '../images/blue-flame.png'
 import itemObject from '../images/item-object.png'
 import enemy from '../images/enemy-spritesheet.png'
-
+import view from '../images/view.png'
 
 const Resources = {
     Background: new ImageSource(background),
@@ -15,7 +15,8 @@ const Resources = {
     Player: new ImageSource(playerCharacter),
     Glint: new ImageSource(glint),
     Item: new ImageSource(itemObject),
-    Enemy: new ImageSource(enemy)
+    Enemy: new ImageSource(enemy),
+    View: new ImageSource(view)
 }
 
 const ResourceLoader = new Loader([
@@ -24,9 +25,8 @@ const ResourceLoader = new Loader([
     Resources.Player,
     Resources.Glint,
     Resources.Item,
-    Resources.Enemy
+    Resources.Enemy,
+    Resources.View
 ])
-
-ResourceLoader.backgroundColor = Color.fromHex('#191919')
 
 export { Resources, ResourceLoader }
