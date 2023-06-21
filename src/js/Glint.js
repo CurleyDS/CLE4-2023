@@ -1,11 +1,10 @@
 import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
 import { Resources } from "./resources.js";
-import { Player } from "./player.js";
 
 export class Glint extends Actor {
 
     constructor() {
-        super({width: 250, height: 250});
+        super({width: 250, height: 250})
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.scale = new Vector(0.2, 0.2)
         const flySheet = SpriteSheet.fromImageSource({
@@ -20,14 +19,12 @@ export class Glint extends Actor {
         const thinking = Animation.fromSpriteSheet(flySheet, range(6, 7), 350);
         const angry = Animation.fromSpriteSheet(flySheet, range(10, 11), 250);
 
-
         this.graphics.add("idle", idle);
         this.graphics.add("shocked", shocked);
         this.graphics.add("sad1", sad1);
         this.graphics.add("sad2", sad2);
         this.graphics.add("thinking", thinking);
         this.graphics.add("angry", angry);
-
     }
 
     onInitialize(engine) {
@@ -36,7 +33,6 @@ export class Glint extends Actor {
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
     }
-
 
     onPreUpdate(engine) {
         if (engine.input.keyboard.isHeld(Input.Keys.Key1)) {
@@ -59,18 +55,15 @@ export class Glint extends Actor {
             this.scale = new Vector (0.35, 0.30);
             this.anchor = new Vector(0.5,1.5)
         }
-
         if (engine.input.keyboard.isHeld(Input.Keys.Key5)) {
             this.graphics.use('angry')
             this.scale = new Vector (0.2, 0.2);
             this.anchor = new Vector(0.5,2)
         }
-
         if (engine.input.keyboard.isHeld(Input.Keys.Key6)) {
             this.graphics.use('sad2')
-            this.scale = new Vector (0.20, 0.20);
+            this.scale = new Vector (0.20, 0.20)
             this.anchor = new Vector(0.5,2)
         }
-
     }
 }

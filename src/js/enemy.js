@@ -7,12 +7,18 @@ export class Enemy extends Actor {
     currentPosition
     direction
     aggro
+    x
+    y
 
-    constructor() {
+    constructor(x = 0, y = 0) {
         super({width: 500, height: 750});
         this.currentPosition = 0
         this.direction = true
         this.aggro = false
+
+        this.x = x
+        this.y = y
+
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.body.collisionType = CollisionType.Active
         this.scale = new Vector(0.17, 0.17)
@@ -37,7 +43,7 @@ export class Enemy extends Actor {
     }
 
     onInitialize(engine) {
-        this.pos = new Vector(700, 550)
+        this.pos = new Vector(this.x, this.y)
         this.addChild(new View)
         
         this.on('precollision', (event) => this.touchSomething(event))

@@ -1,13 +1,9 @@
 import {Scene, Actor, Engine, Physics, Vector, Shape} from "excalibur"
-import { Resources } from './resources.js'
 import { Player } from "./player.js";
 import { Glint } from "./glint.js";
 import { Item } from "./item.js";
-import { Background } from "./background.js";
 import { Platform } from "./platform.js";
 import { Enemy } from "./enemy.js";
-
-
 
 export class Play extends Scene {
     game
@@ -24,14 +20,10 @@ export class Play extends Scene {
     }
 
     onActivate(ctx) {
-
-        // this.background = new Background();
-        // this.add(this.background);
-
-        this.platform = new Platform();
+        this.platform = new Platform(625, 800);
         this.add(this.platform);
 
-        this.player = new Player();
+        this.player = new Player(500, 600);
         this.add(this.player);
 
         this.glint = new Glint()
@@ -40,7 +32,7 @@ export class Play extends Scene {
         this.item = new Item("item");
         this.add(this.item);
 
-        this.enemy = new Enemy();
+        this.enemy = new Enemy(1000, 600);
         this.add(this.enemy);
     }
 }

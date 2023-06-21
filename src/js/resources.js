@@ -11,7 +11,6 @@ import itemObject from '../images/item-object.png'
 import enemy from '../images/enemy-spritesheet.png'
 import view from '../images/view.png'
 
-
 const Resources = {
     Background: new ImageSource(background),
     Background0: new ImageSource(backgroundLevel0),
@@ -22,7 +21,6 @@ const Resources = {
     Item: new ImageSource(itemObject),
     Enemy: new ImageSource(enemy),
     View: new ImageSource(view)
-
 }
 
 const ResourceLoader = new Loader([
