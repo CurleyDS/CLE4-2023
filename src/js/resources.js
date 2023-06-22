@@ -11,7 +11,7 @@ import itemObject from '../images/item-object.png'
 import enemy from '../images/enemy-spritesheet.png'
 import view from '../images/view.png'
 import keys from '../images/keys-spritesheet.png'
-import gameover from '../images/game;over.png'
+import gameover from '../images/game-over.png'
 
 
 
