@@ -29,7 +29,7 @@ export class Glint extends Actor {
 
     onInitialize(engine) {
         this.graphics.use("idle");
-        this.pos = new Vector(engine.currentScene.player.pos.x, engine.currentScene.player.pos.y + 60)
+        this.pos = new Vector(engine.currentScene.player.pos.x + 50, engine.currentScene.player.pos.y + 120)
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
     }

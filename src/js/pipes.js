@@ -8,8 +8,8 @@ export class Pipes extends Actor {
         super({width: Resources.Pipe1.width, height: Resources.Pipe1.height});
         this.body.collisionType = CollisionType.Fixed
         this.pipeImage = pipeImage;
-        this.x = x
-        this.y = y
+        this.x = x;
+        this.y = y;
     }
 
     onInitialize(engine) {

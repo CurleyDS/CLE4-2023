@@ -25,7 +25,5 @@ export class Item extends Actor {
     onInitialize(engine) {
         this.sprite = Resources.Keys.toSprite()
         this.graphics.use('sparkle')
-
-
     }
 }

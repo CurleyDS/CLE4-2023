@@ -3,6 +3,8 @@ import { Resources } from "./resources.js";
 import { Platform } from "./platform.js";
 import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
+import { Enemy } from "./enemy.js"
+import {StandingupCollider} from "./standingupcollider.js";
 
 export class Player extends Actor {
     game
@@ -14,14 +16,18 @@ export class Player extends Actor {
     boxAnchor
     x
     y
+    canStand
 
     constructor(x = 0, y = 0) {
         super({width: 500, height: 750});
         this.boxAnchor = new Vector(0.5,0.40)
         this.box = Shape.Box(500, 750, Vector.Half);
-        this.box2 = Shape.Box(500, 600, this.boxAnchor);
+        this.box2 = Shape.Box(500, 590, this.boxAnchor);
 
         this.collider.set(this.box);
+
+        this.addChild(new StandingupCollider())
+        this.canStand = true;
 
         this.x = x
         this.y = y
@@ -75,6 +81,10 @@ export class Player extends Actor {
             this.grounded = true
             this.jumped = false
         }
+
+        if(event.other instanceof Enemy) {
+            this.game.goToScene('gameOver');
+        }
     }
 
     touchSomething(event) {
@@ -102,19 +112,35 @@ export class Player extends Actor {
     }
     
     onPreUpdate(engine) {
+
+        console.log(this.canStand);
+
         let xspeed = 0
         let yspeed = 0
 
-        // walking
-        if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
-            xspeed = -300
-            this.currentGraphic = 'walkleft'
-            this.collider.set(this.box);
-        }
-        if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
-            xspeed = 300
-            this.currentGraphic = 'walkright'
-            this.collider.set(this.box);
+        if (this.canStand){
+            // walking
+            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
+                xspeed = -300
+                this.currentGraphic = 'walkleft'
+                this.collider.set(this.box);
+            }
+            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
+                xspeed = 300
+                this.currentGraphic = 'walkright'
+                this.collider.set(this.box);
+            }
+        } else {
+            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
+                xspeed = -100
+                this.currentGraphic = 'crouchleft'
+                this.collider.set(this.box2);
+            }
+            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
+                xspeed = 100
+                this.currentGraphic = 'crouchright'
+                this.collider.set(this.box2);
+            }
         }
 
         // crouching/hiding
@@ -170,7 +196,7 @@ export class Player extends Actor {
                 }
             }
         } else {
-            yspeed = 600
+            yspeed = 700
             if (this.currentGraphic == 'jumpleft') {
                 this.currentGraphic = 'idleleft'
                 this.collider.set(this.box);
@@ -180,18 +206,31 @@ export class Player extends Actor {
                 this.collider.set(this.box);
             }
         }
-        
-        // standing
-        if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
-            this.currentGraphic = 'idleleft'
-            this.collider.set(this.box);
-        }
-        if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
-            this.currentGraphic = 'idleright'
-            this.collider.set(this.box);
-        }
 
+        if(this.canStand){
+            // standing
+            if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
+                this.currentGraphic = 'idleleft'
+                this.collider.set(this.box);
+            }
+            if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
+                this.currentGraphic = 'idleright'
+                this.collider.set(this.box);
+            } else {
+                if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
+
+                    this.currentGraphic = 'crouchIdleleft'
+                    this.collider.set(this.box2);
+                }
+                if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
+                    this.currentGraphic = 'crouchIdleright'
+                    this.collider.set(this.box2);
+                }
+            }
+
+        }
         this.vel = new Vector(xspeed, yspeed)
         this.graphics.use(this.currentGraphic)
     }
 }
+

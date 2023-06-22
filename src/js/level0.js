@@ -7,6 +7,7 @@ import { Background } from "./background.js";
 import { Platform } from "./platform.js";
 import { Enemy } from "./enemy.js";
 import { Pipes } from "./pipes.js";
+import { Door } from "./door.js";
 
 export class Level0 extends Scene {
     game
@@ -36,16 +37,31 @@ export class Level0 extends Scene {
     }
 
     onActivate(ctx) {
-        this.player = new Player(50, 120);
-        this.add(this.player);
-
-        this.glint = new Glint()
-        this.add(this.glint);
 
         this.item = new Item("item");
         this.add(this.item);
 
         this.enemy = new Enemy(250, 400);
         this.add(this.enemy);
+
+        this.door = new Door();
+        this.add(this.door);
+
+        this.glint = new Glint()
+        this.add(this.glint);
+
+        this.player = new Player(50, 120);
+        this.add(this.player);
+
+    }
+
+    onDeactivate(_context) {
+        super.onDeactivate(_context);
+        this.item.kill()
+        this.enemy.kill()
+        this.door.kill()
+        this.glint.kill()
+        this.player.kill()
     }
 }
+
