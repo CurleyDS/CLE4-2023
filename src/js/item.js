@@ -5,17 +5,17 @@ export class Item extends Actor {
     name
 
     constructor(name, amount=1) {
-        super({width: Resources.Keys.width, height: Resources.Keys.height});
+        super({width: 200, height: 200});
 
         this.name = name
         this.amount = amount
 
-        this.pos = new Vector(323, 360)
-        this.scale = new Vector( 0.3, 0.3)
+        this.pos = new Vector(320, 360)
+        this.scale = new Vector( 0.25, 0.25)
 
         const sparkleSheet = SpriteSheet.fromImageSource({
             image: Resources.Keys,
-            grid: {rows: 1, columns: 2, spriteWidth: 250, spriteHeight: 250},
+            grid: {rows: 1, columns: 2, spriteWidth: 250, spriteHeight: 281},
         });
 
         const sparkle = Animation.fromSpriteSheet(sparkleSheet, range(0, 1), 200);

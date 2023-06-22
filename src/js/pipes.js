@@ -13,7 +13,6 @@ export class Pipes extends Actor {
     }
 
     onInitialize(engine) {
-        this.scale = new Vector(1, 1)
         if(this.pipeImage instanceof ImageSource) {
             this.graphics.use(this.pipeImage.toSprite())
         }
