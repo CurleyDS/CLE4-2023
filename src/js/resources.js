@@ -11,6 +11,7 @@ import itemObject from '../images/item-object.png'
 import enemy from '../images/enemy-spritesheet.png'
 import view from '../images/view.png'
 import keys from '../images/keys-spritesheet.png'
+import gameover from '../images/game;over.png'
 
 
 
@@ -24,7 +25,8 @@ const Resources = {
     Item: new ImageSource(itemObject),
     Enemy: new ImageSource(enemy),
     View: new ImageSource(view),
-    Keys: new ImageSource(keys)
+    Keys: new ImageSource(keys),
+    GameOver: new ImageSource(gameover)
 
 }
 
@@ -37,7 +39,8 @@ const ResourceLoader = new Loader([
     Resources.Glint,
     Resources.Keys,
     Resources.Enemy,
-    Resources.View
+    Resources.View,
+    Resources.GameOver
 ])
 
 export { Resources, ResourceLoader }
