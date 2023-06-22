@@ -10,6 +10,8 @@ import glint from '../images/blue-flame.png'
 import itemObject from '../images/item-object.png'
 import enemy from '../images/enemy-spritesheet.png'
 import view from '../images/view.png'
+import keys from '../images/keys-spritesheet.png'
+
 
 
 const Resources = {
@@ -21,7 +23,8 @@ const Resources = {
     Glint: new ImageSource(glint),
     Item: new ImageSource(itemObject),
     Enemy: new ImageSource(enemy),
-    View: new ImageSource(view)
+    View: new ImageSource(view),
+    Keys: new ImageSource(keys)
 
 }
 
@@ -32,7 +35,7 @@ const ResourceLoader = new Loader([
     Resources.Floor,
     Resources.Player,
     Resources.Glint,
-    Resources.Item,
+    Resources.Keys,
     Resources.Enemy,
     Resources.View
 ])
