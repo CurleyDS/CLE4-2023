@@ -1,4 +1,4 @@
-import {Scene, Actor, Engine, Physics, Vector, Shape} from "excalibur"
+import {Scene, Actor, Engine, Vector, Shape} from "excalibur"
 import { Player } from "./player.js";
 import { Glint } from "./glint.js";
 import { Item } from "./item.js";
@@ -11,8 +11,6 @@ export class Play extends Scene {
 
     constructor() {
         super()
-        Physics.useArcadePhysics()
-        Physics.gravity = new Vector(0, 8000)
     }
 
     onInitialize(engine) {

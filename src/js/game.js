@@ -1,5 +1,5 @@
 import '../css/style.css'
-import { Engine } from "excalibur"
+import { Engine, Vector, Physics } from "excalibur"
 import { ResourceLoader } from './resources.js'
 import { Play } from "./play.js";
 import {Level0} from "./level0.js";
@@ -10,6 +10,8 @@ export class Game extends Engine {
         super({ width: 1200, height: 800 })
         // this.showDebug(true)
         // this.debug.transform.showAll = true
+        Physics.useArcadePhysics()
+        Physics.gravity = new Vector(0, 20000)
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
