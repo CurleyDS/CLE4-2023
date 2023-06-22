@@ -97,7 +97,7 @@ export class Player extends Actor {
             this.game.clock.schedule(() => {
                 this.grounded = false
                 console.log('falling');
-            }, 300)
+            }, 200)
         }
     }
     
@@ -170,6 +170,7 @@ export class Player extends Actor {
                 }
             }
         } else {
+            yspeed = 600
             if (this.currentGraphic == 'jumpleft') {
                 this.currentGraphic = 'idleleft'
                 this.collider.set(this.box);
