@@ -15,7 +15,7 @@ export class Player extends Actor {
     x
     y
 
-    constructor(x,y) {
+    constructor(x = 0, y = 0) {
         super({width: 500, height: 750});
         this.boxAnchor = new Vector(0.5,0.40)
         this.box = Shape.Box(500, 750, Vector.Half);
@@ -25,7 +25,6 @@ export class Player extends Actor {
 
         this.x = x
         this.y = y
-
 
         this.body.collisionType = CollisionType.Active
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
@@ -41,11 +40,10 @@ export class Player extends Actor {
         const idleLeft = Animation.fromSpriteSheet(walkSheet, range(12, 14), 150);
         const crouchRight = Animation.fromSpriteSheet(walkSheet, range(6, 9), 150);
         const crouchLeft = Animation.fromSpriteSheet(walkSheet, range(18, 21), 150);
-        const crouchIdleRight = Animation.fromSpriteSheet(walkSheet, range(6, 6), 150);
-        const crouchIdleLeft = Animation.fromSpriteSheet(walkSheet, range(18, 18), 150);
+        const crouchIdleRight = Animation.fromSpriteSheet(walkSheet, range(5, 6), 150);
+        const crouchIdleLeft = Animation.fromSpriteSheet(walkSheet, range(17, 18), 150);
         const jumpRight = Animation.fromSpriteSheet(walkSheet, range(10, 10), 200);
         const jumpLeft = Animation.fromSpriteSheet(walkSheet, range(22, 22), 200);
-
 
         this.graphics.add("walkright", walkRight);
         this.graphics.add("walkleft", walkLeft);
@@ -58,8 +56,6 @@ export class Player extends Actor {
         this.graphics.add("jumpright", jumpRight);
         this.graphics.add("jumpleft", jumpLeft);
     }
-
-
 
     onInitialize(engine) {
         this.game = engine;
@@ -119,7 +115,6 @@ export class Player extends Actor {
             xspeed = 300
             this.currentGraphic = 'walkright'
             this.collider.set(this.box);
-
         }
 
         // crouching/hiding
@@ -131,31 +126,25 @@ export class Player extends Actor {
             if (this.currentGraphic == 'idleright') {
                 this.currentGraphic = 'crouchIdleright'
                 this.collider.set(this.box2);
-
             }
             if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                 xspeed = -100
                 this.currentGraphic = 'crouchleft'
                 this.collider.set(this.box2);
-
-
             }
             if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
                 xspeed = 100
                 this.currentGraphic = 'crouchright'
                 this.collider.set(this.box2);
-
             }
         } else {
             if (this.currentGraphic == 'crouchIdleleft') {
                 this.currentGraphic = 'idleleft'
                 this.collider.set(this.box);
-
             }
             if (this.currentGraphic == 'crouchIdleright') {
                 this.currentGraphic = 'idleright'
                 this.collider.set(this.box);
-
             }
         }
 
@@ -166,34 +155,28 @@ export class Player extends Actor {
                 if (this.currentGraphic == 'idleleft') {
                     this.currentGraphic = 'jumpleft'
                     this.collider.set(this.box);
-
                 }
                 if (this.currentGraphic == 'idleright') {
                     this.currentGraphic = 'jumpright'
                     this.collider.set(this.box);
-
                 }
                 if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                     this.currentGraphic = 'jumpleft'
                     this.collider.set(this.box);
-
                 }
                 if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
                     this.currentGraphic = 'jumpright'
                     this.collider.set(this.box);
-
                 }
             }
         } else {
             if (this.currentGraphic == 'jumpleft') {
                 this.currentGraphic = 'idleleft'
                 this.collider.set(this.box);
-
             }
             if (this.currentGraphic == 'jumpright') {
                 this.currentGraphic = 'idleright'
                 this.collider.set(this.box);
-
             }
         }
         
@@ -201,7 +184,6 @@ export class Player extends Actor {
         if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
             this.currentGraphic = 'idleleft'
             this.collider.set(this.box);
-
         }
         if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
             this.currentGraphic = 'idleright'

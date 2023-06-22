@@ -1,6 +1,4 @@
 import {Actor, ImageSource, Vector} from 'excalibur'
-import { Resources } from './resources.js'
-
 
 export class Background extends Actor {
     backgroundImage;
@@ -19,4 +17,3 @@ export class Background extends Actor {
         }
     }
 }
-

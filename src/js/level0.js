@@ -8,8 +8,6 @@ import { Platform } from "./platform.js";
 import { Enemy } from "./enemy.js";
 import { Pipes } from "./pipes.js";
 
-
-
 export class Level0 extends Scene {
     game
     box
@@ -25,23 +23,23 @@ export class Level0 extends Scene {
 
         this.background = new Background(Resources.Background0);
         this.add(this.background);
-    }
 
-    onActivate(ctx) {
         this.ground = new Platform(600, 780);
         this.add(this.ground);
 
         this.platform = new Platform(800, 500);
         this.add(this.platform);
 
-        this.platform2 = new Platform(330, 225);
+        this.platform2 = new Platform(330, 220);
         this.add(this.platform2);
-
-        this.player = new Player(200, 50);
-        this.add(this.player);
 
         this.pipe1 = new Pipes(Resources.Pipe1, 600, 65);
         this.add(this.pipe1);
+    }
+
+    onActivate(ctx) {
+        this.player = new Player(50, 120);
+        this.add(this.player);
 
         this.glint = new Glint()
         this.add(this.glint);
@@ -49,7 +47,7 @@ export class Level0 extends Scene {
         this.item = new Item("item");
         this.add(this.item);
 
-        this.enemy = new Enemy();
+        this.enemy = new Enemy(250, 400);
         this.add(this.enemy);
     }
 }

@@ -5,7 +5,7 @@ export class Platform extends Actor {
     x
     y
 
-    constructor(x, y){
+    constructor(x = 0, y = 0){
         super({ width: Resources.Floor.width, height: Resources.Floor.height})
         this.body.collisionType = CollisionType.Fixed
         this.x = x
@@ -19,4 +19,3 @@ export class Platform extends Actor {
         this.pos = new Vector(this.x, this.y)
     }
 }
-

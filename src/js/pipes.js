@@ -1,7 +1,6 @@
 import {Actor, CollisionType, ImageSource, Vector} from 'excalibur'
 import { Resources } from './resources.js'
 
-
 export class Pipes extends Actor {
     pipeImage;
 
