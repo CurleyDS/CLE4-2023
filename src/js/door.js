@@ -1,9 +1,10 @@
 import {
     Actor,
     Vector,
-    CollisionType, SpriteSheet, Animation, range
+    CollisionType, SpriteSheet, Animation, range, Input
 } from "excalibur";
 import { Resources } from "./resources.js";
+import {Player} from "./player.js";
 
 export class Door extends Actor {
 
@@ -27,9 +28,25 @@ export class Door extends Actor {
         this.scale = new Vector(0.3, 0.3)
     }
 
-    onInitialize(_engine) {
-        super.onInitialize(_engine);
+    onInitialize(engine) {
+        this.game = engine;
         this.graphics.use('closed')
+
+        this.on('precollision', (event) => this.touchSomething(event))
+    }
+
+    touchSomething(event) {
+        // wanneer de speler iets aanraakt
+        if (event.other instanceof Player) {
+            if(this.game.currentScene.player.inventory.hasItem('keys')){
+                if (this.game.input.keyboard.isHeld(Input.Keys.E)){
+                    this.graphics.use('open')
+                    this.game.clock.schedule(()=>{
+                        this.game.goToScene('gameOver');
+                    },1000)
+                }
+            }
+        }
     }
 
 }

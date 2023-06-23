@@ -94,6 +94,7 @@ export class Player extends Actor {
                 this.inventory.addToInventory(event.other)
                 // zorg ervoor dat item verdwijnt na oppakken
                 event.other.kill()
+                console.log(this.inventory);
             }
         }
     }
