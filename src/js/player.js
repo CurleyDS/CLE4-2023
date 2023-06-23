@@ -129,7 +129,6 @@ export class Player extends Actor {
         let xspeed = 0
         let yspeed = 0
 
-        console.log(this.z)
         if (this.isHiding) {
             if (this.game.input.keyboard.isHeld(Input.Keys.Space)) {
                 this.actions.fade(1, 100)

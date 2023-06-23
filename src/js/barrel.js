@@ -19,7 +19,6 @@ export class Barrel extends Actor {
 
         this.on('collisionstart', (event) => this.inFrontOfSomething(event))
         this.on('collisionend', (event) => this.detachSomething(event))
-        console.log(this)
     }
 
     inFrontOfSomething(event) {
