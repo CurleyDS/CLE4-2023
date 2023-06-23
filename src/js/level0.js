@@ -7,6 +7,7 @@ import { Background } from "./background.js";
 import { Platform } from "./platform.js";
 import { Enemy } from "./enemy.js";
 import { Pipes } from "./pipes.js";
+import { Barrel } from './barrel.js';
 import { Door } from "./door.js";
 
 export class Level0 extends Scene {
@@ -50,7 +51,10 @@ export class Level0 extends Scene {
         this.enemy = new Enemy(250, 400);
         this.add(this.enemy);
 
-        this.door = new Door();
+        this.barrel = new Barrel(600, 440);
+        this.add(this.barrel);
+
+        this.door = new Door(1050, 685);
         this.add(this.door);
 
         this.glint = new Glint()
@@ -68,6 +72,7 @@ export class Level0 extends Scene {
         super.onDeactivate(_context);
         this.item.kill()
         this.enemy.kill()
+        this.barrel.kill()
         this.door.kill()
         this.glint.kill()
         this.player.kill()

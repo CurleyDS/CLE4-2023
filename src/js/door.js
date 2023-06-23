@@ -1,19 +1,10 @@
-import {
-    Actor,
-    Vector,
-    Label,
-    Font,
-    FontUnit,
-    Color,
-    CollisionType, SpriteSheet, Animation, range, Input
-} from "excalibur";
+import { Actor, Vector, Label, Font, FontUnit, Color, CollisionType, SpriteSheet, Animation, range, Input } from "excalibur";
 import {Resources} from "./resources.js";
 import {Player} from "./player.js";
-import {Pipes} from "./pipes.js";
 
 export class Door extends Actor {
 
-    constructor() {
+    constructor(x, y) {
         super({width: 500, height: 500});
 
         const doorSheet = SpriteSheet.fromImageSource({
@@ -21,15 +12,13 @@ export class Door extends Actor {
             grid: {rows: 3, columns: 3, spriteWidth: 500, spriteHeight: 500},
         });
 
-        console.log(this.width);
-        console.log(this.height);
         const open = Animation.fromSpriteSheet(doorSheet, range(0, 4), 200);
         const closed = doorSheet.sprites[0]
 
         this.graphics.add("open", open);
         this.graphics.add("closed", closed);
 
-        this.pos = new Vector(1050, 685)
+        this.pos = new Vector(x, y)
         this.scale = new Vector(0.3, 0.3)
     }
 

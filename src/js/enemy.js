@@ -2,6 +2,7 @@ import { Actor, SpriteSheet, Vector, Input, Animation, CollisionType, range } fr
 import { Resources } from "./resources.js";
 import { Platform } from "./platform.js";
 import { View } from "./view.js";
+import { Pipes } from "./pipes.js";
 
 export class Enemy extends Actor {
     platformStart
@@ -48,8 +49,15 @@ export class Enemy extends Actor {
         this.pos = new Vector(this.x, this.y)
         this.addChild(new View)
         
+        this.on('collisionstart', (event) => this.hitSomething(event))
         this.on('precollision', (event) => this.touchSomething(event))
         this.graphics.use("idleright")
+    }
+
+    hitSomething(event) {
+        if (event.other instanceof Pipes) {
+            this.direction = !this.direction
+        }
     }
 
     touchSomething(event) {
