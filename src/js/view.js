@@ -9,6 +9,7 @@ export class View extends Actor {
     }
 
     onInitialize(engine) {
+        this.game = engine;
         this.sprite = Resources.View.toSprite()
         this.sprite.width = 1500
         this.sprite.height = 750
@@ -22,12 +23,18 @@ export class View extends Actor {
     noticeSomething(event) {
         if (event.other instanceof Player) {
             this.parent.aggro = true
+            this.game.currentScene.glint.graphics.use('shocked')
+            this.game.currentScene.glint.scale = new Vector(0.2, 0.2)
+            this.game.currentScene.glint.anchor = new Vector(0.5,2)
         }
     }
 
     loseSomething(event) {
         if (event.other instanceof Player) {
             this.parent.aggro = false
+            this.game.currentScene.glint.graphics.use('idle')
+            this.game.currentScene.glint.scale = new Vector(0.2, 0.2);
+            this.game.currentScene.glint.anchor = new Vector(0.5, 2)
         }
     }
 

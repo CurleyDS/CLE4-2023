@@ -53,6 +53,9 @@ export class Level0 extends Scene {
         this.player = new Player(50, 120);
         this.add(this.player);
 
+        // this.inventory = this.player.inventory;
+        // this.add(this.inventory);
+
     }
 
     onDeactivate(_context) {

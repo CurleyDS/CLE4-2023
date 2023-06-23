@@ -82,8 +82,10 @@ export class Player extends Actor {
         }
 
         if(event.other instanceof Enemy) {
-            this.game.goToScene('gameOver');
+            this.game.goToScene('gameover');
         }
+
+
     }
 
     touchSomething(event) {
