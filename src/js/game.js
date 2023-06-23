@@ -18,12 +18,12 @@ export class Game extends Engine {
     }
 
     startGame() {
-        this.addScene('startgame', new StartGame)
+        // this.addScene('startgame', new StartGame)
         this.addScene('level0', new Level0())
         this.addScene('gameover', new GameOver())
 
 
-        this.goToScene('startgame')
+        this.goToScene('level0')
     }
 }
 

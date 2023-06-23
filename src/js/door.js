@@ -34,6 +34,7 @@ export class Door extends Actor {
 
     inFrontOfSomething(event) {
         if (event.other instanceof Player) {
+            console.log('hit the door');
             this.game.currentScene.glint.graphics.use('thinking')
             this.game.currentScene.glint.scale = new Vector(0.35, 0.30);
             this.game.currentScene.glint.anchor = new Vector(0.5, 1.5);
