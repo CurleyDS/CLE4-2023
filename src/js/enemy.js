@@ -4,7 +4,9 @@ import { Platform } from "./platform.js";
 import { View } from "./view.js";
 
 export class Enemy extends Actor {
-    currentPosition
+    platformStart
+    platformEnd
+    platformPosition
     direction
     aggro
     x
@@ -12,7 +14,7 @@ export class Enemy extends Actor {
 
     constructor(x = 0, y = 0) {
         super({width: 500, height: 750});
-        this.currentPosition = 0
+        this.platformPosition = 0
         this.direction = true
         this.aggro = false
 
@@ -52,7 +54,8 @@ export class Enemy extends Actor {
 
     touchSomething(event) {
         if (event.other instanceof Platform) {
-            this.currentPosition = (event.other.width - this.pos.x)
+            this.platformStart = (event.other.pos.x - (event.other.width / 2))
+            this.platformEnd = (event.other.pos.x + (event.other.width / 2))
         }
     }
 
@@ -77,11 +80,12 @@ export class Enemy extends Actor {
             }
         }
 
-        if (this.currentPosition < 0) {
-            this.direction = false
-        }
-        if (this.currentPosition > 1250) {
+        console.log(this.pos.x)
+        if (this.pos.x < this.platformStart) {
             this.direction = true
+        }
+        if (this.pos.x > this.platformEnd) {
+            this.direction = false
         }
 
         this.vel = new Vector(xspeed, 0)
