@@ -80,7 +80,6 @@ export class Enemy extends Actor {
             }
         }
 
-        console.log(this.pos.x)
         if (this.pos.x < this.platformStart) {
             this.direction = true
         }

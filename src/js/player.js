@@ -113,6 +113,7 @@ export class Player extends Actor {
         let xspeed = 0
         let yspeed = 0
 
+        // standing movements
         if (this.canStand){
             // walking
             if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
@@ -125,62 +126,82 @@ export class Player extends Actor {
                 this.currentGraphic = 'walkright'
                 this.collider.set(this.box);
             }
-        } else {
-            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
-                xspeed = -100
-                this.currentGraphic = 'crouchleft'
-                this.collider.set(this.box2);
-            }
-            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
-                xspeed = 100
-                this.currentGraphic = 'crouchright'
-                this.collider.set(this.box2);
-            }
-        }
-
-        // crouching/hiding
-        if (engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
-            if (this.currentGraphic == 'idleleft') {
-                this.currentGraphic = 'crouchIdleleft'
-                this.collider.set(this.box2);
-            }
-            if (this.currentGraphic == 'idleright') {
-                this.currentGraphic = 'crouchIdleright'
-                this.collider.set(this.box2);
-            }
-            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
-                xspeed = -100
-                this.currentGraphic = 'crouchleft'
-                this.collider.set(this.box2);
-            }
-            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
-                xspeed = 100
-                this.currentGraphic = 'crouchright'
-                this.collider.set(this.box2);
-            }
-        } else {
-            if (this.currentGraphic == 'crouchIdleleft') {
+            
+            // standing
+            if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
                 this.currentGraphic = 'idleleft'
                 this.collider.set(this.box);
             }
-            if (this.currentGraphic == 'crouchIdleright') {
+            if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
                 this.currentGraphic = 'idleright'
                 this.collider.set(this.box);
             }
+        } else {
+            // forced crouchwalking
+            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left) || this.currentGraphic == 'walkleft') {
+                xspeed = -100
+                this.currentGraphic = 'crouchleft'
+                this.collider.set(this.box2);
+            }
+            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right) || this.currentGraphic == 'walkright') {
+                xspeed = 100
+                this.currentGraphic = 'crouchright'
+                this.collider.set(this.box2);
+            }
+        
+            // forced crouching
+            if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left) || this.currentGraphic == 'idleleft') {
+                this.currentGraphic = 'crouchIdleleft'
+                this.collider.set(this.box2);
+            }
+            if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right) || this.currentGraphic == 'idleright') {
+                this.currentGraphic = 'crouchIdleright'
+                this.collider.set(this.box2);
+            }
         }
 
-        // jumping
+        // crouch movements
+        if (engine.input.keyboard.isHeld(Input.Keys.ControlLeft)) {
+            // crouchwalking
+            if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
+                xspeed = -100
+                this.currentGraphic = 'crouchleft'
+                this.collider.set(this.box2);
+            }
+            if (engine.input.keyboard.isHeld(Input.Keys.D) || engine.input.keyboard.isHeld(Input.Keys.Right)) {
+                xspeed = 100
+                this.currentGraphic = 'crouchright'
+                this.collider.set(this.box2);
+            }
+
+            // crouching
+            if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left) || this.currentGraphic == 'idleleft') {
+                this.currentGraphic = 'crouchIdleleft'
+                this.collider.set(this.box2);
+            }
+            if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right) || this.currentGraphic == 'idleright') {
+                this.currentGraphic = 'crouchIdleright'
+                this.collider.set(this.box2);
+            }
+        } else {
+            // else is equivalent to `engine.input.keyboard.wasReleased(Input.Keys.ControlLeft)` check
+            if (this.canStand) {
+                if (this.currentGraphic == 'crouchIdleleft') {
+                    this.currentGraphic = 'idleleft'
+                    this.collider.set(this.box);
+                }
+                if (this.currentGraphic == 'crouchIdleright') {
+                    this.currentGraphic = 'idleright'
+                    this.collider.set(this.box);
+                }
+            }
+        }
+
+        // jump movements
         if (this.grounded || !this.jumped) {
             if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
+                // walking jumps
                 yspeed = -600
-                if (this.currentGraphic == 'idleleft') {
-                    this.currentGraphic = 'jumpleft'
-                    this.collider.set(this.box);
-                }
-                if (this.currentGraphic == 'idleright') {
-                    this.currentGraphic = 'jumpright'
-                    this.collider.set(this.box);
-                }
                 if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                     this.currentGraphic = 'jumpleft'
                     this.collider.set(this.box);
@@ -189,8 +210,19 @@ export class Player extends Actor {
                     this.currentGraphic = 'jumpright'
                     this.collider.set(this.box);
                 }
+
+                // standing jumps
+                if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left) || this.currentGraphic == 'idleleft') {
+                    this.currentGraphic = 'jumpleft'
+                    this.collider.set(this.box);
+                }
+                if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right) || this.currentGraphic == 'idleright') {
+                    this.currentGraphic = 'jumpright'
+                    this.collider.set(this.box);
+                }
             }
         } else {
+            // else is equivalent to `engine.input.keyboard.wasReleased(Input.Keys.Space)` check
             yspeed = 700
             if (this.currentGraphic == 'jumpleft') {
                 this.currentGraphic = 'idleleft'
@@ -201,29 +233,7 @@ export class Player extends Actor {
                 this.collider.set(this.box);
             }
         }
-
-        if(this.canStand){
-            // standing
-            if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
-                this.currentGraphic = 'idleleft'
-                this.collider.set(this.box);
-            }
-            if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
-                this.currentGraphic = 'idleright'
-                this.collider.set(this.box);
-            } else {
-                if (engine.input.keyboard.wasReleased(Input.Keys.A) || engine.input.keyboard.wasReleased(Input.Keys.Left)) {
-
-                    this.currentGraphic = 'crouchIdleleft'
-                    this.collider.set(this.box2);
-                }
-                if (engine.input.keyboard.wasReleased(Input.Keys.D) || engine.input.keyboard.wasReleased(Input.Keys.Right)) {
-                    this.currentGraphic = 'crouchIdleright'
-                    this.collider.set(this.box2);
-                }
-            }
-
-        }
+        
         this.vel = new Vector(xspeed, yspeed)
         this.graphics.use(this.currentGraphic)
     }
