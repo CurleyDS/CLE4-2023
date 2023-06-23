@@ -27,7 +27,7 @@ export class Barrel extends Actor {
             this.game.currentScene.glint.scale = new Vector(0.35, 0.30);
             this.game.currentScene.glint.anchor = new Vector(0.5, 1.5);
             this.infoDoor = new Label({
-                text: `Look! You can hide [E] here`,
+                text: `Look! You can hide [E] here. When he's gone jump [Spacebar] out`,
                 font: new Font({
                     unit: FontUnit.Px,
                     family: 'Arial',
@@ -49,14 +49,15 @@ export class Barrel extends Actor {
         }
     }
 
-    onPreUpdate(engine) {
-        if (this.infoDoor) {
-            if (this.game.currentScene.player.isHiding) {
-                this.infoDoor.text = `When he's gone, jump [spacebar] to get out!`
-            } else {
-                this.infoDoor.text = `Look! You can hide [E] here.`
-            }
-        }
-    }
+    // onPreUpdate(engine) {
+    //     if (this.infoDoor) {
+    //         console.log(this.game.currentScene.player.isHiding)
+    //         if (this.game.currentScene.player.isHiding) {
+    //             this.infoDoor.text = `When he's gone, jump [spacebar] to get out!`
+    //         } else {
+    //             this.infoDoor.text = `Look! You can hide [E] here.`
+    //         }
+    //     }
+    // }
 }
 
