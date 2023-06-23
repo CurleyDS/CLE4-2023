@@ -5,7 +5,7 @@ export class Item extends Actor {
     name
 
     constructor(name, amount=1) {
-        super({width: 200, height: 200});
+        super({width: 300, height: Resources.Keys.height});
 
         this.name = name
         this.amount = amount
