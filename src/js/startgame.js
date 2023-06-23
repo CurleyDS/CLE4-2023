@@ -2,14 +2,14 @@ import {Scene, Input} from "excalibur";
 import {Background} from "./background.js";
 import {Resources} from "./resources.js";
 
-export class GameOver extends Scene {
+export class StartGame extends Scene {
 
     onInitialize(_engine) {
         super.onInitialize(_engine);
 
         this.game =_engine
 
-        this.background = new Background(Resources.GameOver)
+        this.background = new Background(Resources.StartGame)
         this.add(this.background)
 
     }

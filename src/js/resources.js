@@ -16,6 +16,7 @@ import view from '../images/view.png'
 import keys from '../images/keys-spritesheet.png'
 import door from '../images/door-spritesheet.png'
 import gameover from '../images/game-over.png'
+import startgame from '../images/title;start.png'
 import barrel1 from '../images/barrel-normal.png'
 
 
@@ -36,6 +37,7 @@ const Resources = {
     Keys: new ImageSource(keys),
     Door: new ImageSource(door),
     GameOver: new ImageSource(gameover),
+    StartGame: new ImageSource(startgame),
     Barrel1: new ImageSource(barrel1)
 
 }
@@ -55,6 +57,7 @@ const ResourceLoader = new Loader([
     Resources.View,
     Resources.Door,
     Resources.GameOver,
+    Resources.StartGame,
     Resources.Barrel1
 ])
 

@@ -1,4 +1,4 @@
-import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
+import {Actor, SpriteSheet, Vector, Input, Animation, range, Label, Font, FontUnit, Color} from "excalibur";
 import { Resources } from "./resources.js";
 
 export class Glint extends Actor {
@@ -32,6 +32,20 @@ export class Glint extends Actor {
         this.pos = new Vector(engine.currentScene.player.pos.x + 50, engine.currentScene.player.pos.y + 120)
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
+
+        this.info = new Label({
+            text: "Hi I'm Glint. You need to get out of here. I'll be your guide",
+            font: new Font({
+                unit: FontUnit.Px,
+                family: 'Arial',
+                size: 15,
+                color: Color.White,
+            }), pos: new Vector(this.pos.x + 30, this.pos.y -75)
+        })
+        engine.currentScene.add(this.info)
+        engine.clock.schedule(() => {
+            engine.currentScene.remove(this.info)
+        }, 5000)
     }
 
     onPreUpdate(engine) {
