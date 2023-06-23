@@ -3,20 +3,24 @@ import { Resources } from './resources.js'
 
 export class Pipes extends Actor {
     pipeImage;
+    lowhanging;
 
-    constructor(pipeImage, x, y) {
-        super({width: Resources.Pipe1.width, height: Resources.Pipe1.height});
+    constructor(pipeImage, xP, yP, xS, yS, lowhanging = false) {
+        super({width: pipeImage.width, height: pipeImage.height});
         this.body.collisionType = CollisionType.Fixed
         this.pipeImage = pipeImage;
-        this.x = x;
-        this.y = y;
+        this.xP = xP;
+        this.yP = yP;
+        this.xS = xS;
+        this.yS = yS;
+        this.lowhanging = lowhanging;
     }
 
     onInitialize(engine) {
         if(this.pipeImage instanceof ImageSource) {
             this.graphics.use(this.pipeImage.toSprite())
         }
-        this.pos = new Vector(this.x, this.y)
-        this.scale = new Vector(0.27, 0.27)
+        this.pos = new Vector(this.xP, this.yP)
+        this.scale = new Vector(this.xS, this.yS)
     }
 }

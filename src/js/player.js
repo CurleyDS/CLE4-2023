@@ -5,6 +5,8 @@ import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
 import { Enemy } from "./enemy.js"
 import {StandingupCollider} from "./standingupcollider.js";
+import {Pipes} from "./pipes.js";
+
 
 export class Player extends Actor {
     game
@@ -76,7 +78,7 @@ export class Player extends Actor {
 
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
-        if (event.other instanceof Platform) {
+        if (event.other instanceof Platform || event.other instanceof Pipes) {
             this.grounded = true
             this.jumped = false
         }
@@ -103,7 +105,7 @@ export class Player extends Actor {
 
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
-        if (event.other instanceof Platform) {
+        if (event.other instanceof Platform || event.other instanceof Pipes) {
             this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
@@ -204,7 +206,7 @@ export class Player extends Actor {
         if (this.grounded || !this.jumped) {
             if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
                 // walking jumps
-                yspeed = -600
+                yspeed = -650
                 if (engine.input.keyboard.isHeld(Input.Keys.A) || engine.input.keyboard.isHeld(Input.Keys.Left)) {
                     this.currentGraphic = 'jumpleft'
                     this.collider.set(this.box);

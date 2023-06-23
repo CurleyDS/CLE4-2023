@@ -32,8 +32,14 @@ export class Level0 extends Scene {
         this.platform2 = new Platform(330, 220);
         this.add(this.platform2);
 
-        this.pipe1 = new Pipes(Resources.Pipe1, 600, 61);
+        this.pipe1 = new Pipes(Resources.Pipe1, 600, 61, 0.27, 0.27, true);
         this.add(this.pipe1);
+        this.pipe2 = new Pipes(Resources.Pipe2, 50, 455, 1.3, 1.3, false);
+        this.add(this.pipe2);
+        this.pipe3 = new Pipes(Resources.Pipe3, 87, 700, 1.3, 1.3, false);
+        this.add(this.pipe3);
+        this.pipe4 = new Pipes(Resources.Pipe4, 1107, 415, 1.5, 1.5, false);
+        this.add(this.pipe4);
     }
 
     onActivate(ctx) {
@@ -41,8 +47,8 @@ export class Level0 extends Scene {
         this.item = new Item("keys");
         this.add(this.item);
 
-        this.enemy = new Enemy(250, 400);
-        this.add(this.enemy);
+        // this.enemy = new Enemy(250, 400);
+        // this.add(this.enemy);
 
         this.door = new Door();
         this.add(this.door);
