@@ -1,4 +1,4 @@
-import { ImageSource, Sound, Resource, Loader } from 'excalibur'
+import {ImageSource, Sound, Resource, Loader, Color} from 'excalibur'
 //tilemap doesn't work
 // import { TiledMapResource } from '@excaliburjs/plugin-tiled'
 import background from '../images/background.png'
@@ -18,6 +18,7 @@ import door from '../images/door-spritesheet.png'
 import gameover from '../images/game-over.png'
 import startgame from '../images/title;start.png'
 import barrel1 from '../images/barrel-normal.png'
+import logo from "../images/title;logo.png";
 
 
 
@@ -60,5 +61,10 @@ const ResourceLoader = new Loader([
     Resources.StartGame,
     Resources.Barrel1
 ])
+
+ResourceLoader.logo = logo
+ResourceLoader.logoWidth = 1111
+ResourceLoader.logoHeight = 459
+ResourceLoader.backgroundColor = Color.Black
 
 export { Resources, ResourceLoader }
