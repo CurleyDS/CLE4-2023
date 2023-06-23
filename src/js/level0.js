@@ -48,7 +48,7 @@ export class Level0 extends Scene {
         this.item = new Item("keys");
         this.add(this.item);
 
-        this.enemy = new Enemy(250, 400);
+        this.enemy = new Enemy(250, 420);
         this.add(this.enemy);
 
         this.barrel = new Barrel(600, 440);
@@ -60,7 +60,7 @@ export class Level0 extends Scene {
         this.glint = new Glint()
         this.add(this.glint);
 
-        this.player = new Player(60, 140);
+        this.player = new Player(60, 160);
         this.add(this.player);
 
         // this.inventory = this.player.inventory;
