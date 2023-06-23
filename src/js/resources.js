@@ -67,4 +67,5 @@ ResourceLoader.logoWidth = 1111
 ResourceLoader.logoHeight = 459
 ResourceLoader.backgroundColor = Color.Black
 
+//exports the resources
 export { Resources, ResourceLoader }
