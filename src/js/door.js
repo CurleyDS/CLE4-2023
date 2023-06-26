@@ -59,7 +59,7 @@ export class Door extends Actor {
                 if (this.game.input.keyboard.isHeld(Input.Keys.E)) {
                     this.graphics.use('open')
                     this.game.clock.schedule(() => {
-                        this.game.goToScene('gameover');
+                        this.game.goToScene('level1');
                     }, 1000)
                 }
             }

@@ -24,13 +24,13 @@ export class Level0 extends Scene {
         this.background = new Background(Resources.Background0);
         this.add(this.background);
 
-        this.ground = new Platform(600, 780);
+        this.ground = new Platform(Resources.Floor, 600, 780, 1.02, 1.02);
         this.add(this.ground);
 
-        this.platform = new Platform(800, 500);
+        this.platform = new Platform(Resources.Floor, 800, 500, 1.02, 1.02);
         this.add(this.platform);
 
-        this.platform2 = new Platform(330, 220);
+        this.platform2 = new Platform(Resources.Floor,330, 220, 1.02, 1.02);
         this.add(this.platform2);
 
         this.pipe1 = new Pipes(Resources.Pipe1, 600, 61, 0.27, 0.27,0, 0, true, false);
