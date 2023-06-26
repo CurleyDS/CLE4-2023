@@ -18,7 +18,8 @@ import door from '../images/door-spritesheet.png'
 import gameover from '../images/game-over.png'
 import startgame from '../images/title;start.png'
 import barrel1 from '../images/barrel-normal.png'
-import logo from "../images/title;logo.png";
+import logo from "../images/title;logo.png"
+import box from '../images/box;standard.png'
 
 
 
@@ -39,7 +40,8 @@ const Resources = {
     Door: new ImageSource(door),
     GameOver: new ImageSource(gameover),
     StartGame: new ImageSource(startgame),
-    Barrel1: new ImageSource(barrel1)
+    Barrel1: new ImageSource(barrel1),
+    Box1: new ImageSource(box)
 
 }
 
@@ -59,7 +61,8 @@ const ResourceLoader = new Loader([
     Resources.Door,
     Resources.GameOver,
     Resources.StartGame,
-    Resources.Barrel1
+    Resources.Barrel1,
+    Resources.Box1
 ])
 
 ResourceLoader.logo = logo
