@@ -80,7 +80,7 @@ export class Player extends Actor {
 
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
-        if (event.other instanceof Platform || (event.other instanceof Pipes && event.other.platform) ) {
+        if (event.other instanceof Platform || (event.other instanceof Pipes)) {
             this.grounded = true
         }
 
@@ -115,7 +115,7 @@ export class Player extends Actor {
 
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
-        if (event.other instanceof Platform || event.other instanceof Pipes) {
+        if (event.other instanceof Platform || (event.other instanceof Pipes && event.other.platform)) {
             this.game.clock.schedule(() => {
                 this.grounded = false
             }, 200)
