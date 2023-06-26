@@ -43,8 +43,10 @@ export class View extends Actor {
     onPreUpdate(engine) {
         if (this.parent.direction) {
             this.pos = new Vector(1000, 0)
+            this.sprite.flipHorizontal = true
         } else {
             this.pos = new Vector(-1000, 0)
+            this.sprite.flipHorizontal = false
         }
     }
 }
