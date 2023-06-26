@@ -14,7 +14,6 @@ export class Player extends Actor {
     inventory
     currentGraphic
     grounded
-    jumped
     box
     boxAnchor
     x
@@ -83,7 +82,6 @@ export class Player extends Actor {
         // wanneer de speler door iets wordt geraakt
         if (event.other instanceof Platform || (event.other instanceof Pipes && event.other.platform) ) {
             this.grounded = true
-            this.jumped = false
         }
 
         if(event.other instanceof Enemy) {
@@ -118,7 +116,6 @@ export class Player extends Actor {
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
         if (event.other instanceof Platform || event.other instanceof Pipes) {
-            this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false
             }, 200)
@@ -221,7 +218,7 @@ export class Player extends Actor {
             }
     
             // jump movements
-            if (this.grounded || !this.jumped) {
+            if (this.grounded) {
                 if (engine.input.keyboard.isHeld(Input.Keys.Space)) {
                     // walking jumps
                     yspeed = -650
