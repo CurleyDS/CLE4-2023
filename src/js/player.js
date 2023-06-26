@@ -80,7 +80,7 @@ export class Player extends Actor {
 
     hitSomething(event) {
         // wanneer de speler door iets wordt geraakt
-        if (event.other instanceof Platform || (event.other instanceof Pipes)) {
+        if (event.other instanceof Platform || (event.other instanceof Pipes && event.other.platform)) {
             this.grounded = true
         }
 
