@@ -13,7 +13,8 @@ export class Game extends Engine {
         // this.showDebug(true)
         // this.debug.transform.showAll = true
         Physics.useArcadePhysics()
-        Physics.gravity = new Vector(0, 800)
+        // Physics.useRealisticPhysics()
+        Physics.gravity = new Vector( 0, 800)
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
