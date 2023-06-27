@@ -24,9 +24,7 @@ export class View extends Actor {
         if (event.other instanceof Player) {
             if (!event.other.isHiding) {
                 this.parent.aggro = true
-                this.game.currentScene.glint.graphics.use('shocked')
-                this.game.currentScene.glint.scale = new Vector(0.2, 0.2)
-                this.game.currentScene.glint.anchor = new Vector(0.5,2)
+                this.game.currentScene.glint.shocked()
             }
         }
     }
@@ -34,9 +32,7 @@ export class View extends Actor {
     loseSomething(event) {
         if (event.other instanceof Player) {
             this.parent.aggro = false
-            this.game.currentScene.glint.graphics.use('idle')
-            this.game.currentScene.glint.scale = new Vector(0.2, 0.2);
-            this.game.currentScene.glint.anchor = new Vector(0.5, 2)
+            this.game.currentScene.glint.idle()
         }
     }
 
