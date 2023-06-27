@@ -12,6 +12,7 @@ import { Door } from "./door.js";
 import { Fusebox } from "./fusebox.js";
 import { Button } from "./button.js";
 import { Box } from "./box.js";
+import { Fence } from "./fence.js";
 
 
 export class Level1 extends Scene {
@@ -36,27 +37,29 @@ export class Level1 extends Scene {
         this.add(this.pipe7);
         this.pipe8 = new Pipes(Resources.Pipe8, 1120, 350, 1.4, 1.4,0, 0, false, true);
         this.add(this.pipe8);
-        this.pipe9 = new Pipes(Resources.Pipe9, 859, 478, 1.3, 1.3,0, 0, false, true);
+        this.pipe9 = new Pipes(Resources.Pipe9, 859, 483, 1.3, 1.3,0, 0, false, true);
         this.add(this.pipe9);
 
         this.ground = new Platform(Resources.Floor, 601, 780, 1.02, 1.02);
         this.add(this.ground);
 
-        this.platform = new Platform(Resources.ShortPlatform, 930, 520, 0.5, 1.02);
+        this.platform = new Platform(Resources.ShortPlatform, 935, 520, 0.5, 1.02);
         this.add(this.platform);
 
-        this.platform2 = new Platform(Resources.ShortPlatform, 655, 520, 0.80, 1.02);
+        this.platform2 = new Platform(Resources.ShortPlatform, 640, 520, 0.8, 1.02);
         this.add(this.platform2);
 
-        this.platform3 = new Platform(Resources.Floor, 625, 300, 0.5, 1.02);
+        this.platform3 = new Platform(Resources.Floor, 630, 300, 0.45, 1.02);
         this.add(this.platform3);
 
-        this.platform4 = new Platform(Resources.ShortPlatform, 50, 520, 0.75, 1.02);
+        this.platform4 = new Platform(Resources.ShortPlatform, 105, 520, 0.75, 1.02);
         this.add(this.platform4);
 
-        this.platform5 = new Platform(Resources.ShortPlatform, 100, 50, 0.75, 1.02);
-        this.add(this.platform5);
+        this.elevator = new Platform(Resources.MetalPlatform, 120, 50, 0.3, 0.3);
+        this.add(this.elevator);
 
+        this.fence = new Fence(550,400)
+        this.add(this.fence);
 
     }
 

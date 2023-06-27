@@ -30,6 +30,8 @@ import box from '../images/box;standard.png'
 import fusebox from '../images/fusebox.png'
 import tool from '../images/watchamacallit;thingy;spritesheet.png'
 import button from '../images/big;red;button;spritesheet.png'
+import metalPlatform from '../images/a;grey;box;with;screws.png'
+import metalFence from '../images/a;grey;bar;with;screws;on;the;side.png'
 
 
 
@@ -62,7 +64,9 @@ const Resources = {
     Box1: new ImageSource(box),
     Fusebox: new ImageSource(fusebox),
     Tool: new ImageSource(tool),
-    Button: new ImageSource(button)
+    Button: new ImageSource(button),
+    MetalPlatform: new ImageSource(metalPlatform),
+    MetalFence: new ImageSource(metalFence)
 }
 
 const ResourceLoader = new Loader([
@@ -92,7 +96,9 @@ const ResourceLoader = new Loader([
     Resources.Box1,
     Resources.Fusebox,
     Resources.Tool,
-    Resources.Button
+    Resources.Button,
+    Resources.MetalFence,
+    Resources.MetalPlatform
 ])
 
 ResourceLoader.logo = logo
