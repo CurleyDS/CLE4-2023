@@ -3,6 +3,7 @@ import {Resources} from "./resources.js";
 import {Player} from "./player.js";
 
 export class Fusebox extends Actor {
+    isRepaired
 
     constructor(x, y) {
         super({width: 500, height: 500});
@@ -20,6 +21,7 @@ export class Fusebox extends Actor {
 
         this.pos = new Vector(x, y)
         this.scale = new Vector(0.25, 0.25)
+        this.isRepaired = false;
     }
 
     onInitialize(engine) {
@@ -29,6 +31,26 @@ export class Fusebox extends Actor {
         this.on('collisionstart', (event) => this.inFrontOfSomething(event))
         this.on('precollision', (event) => this.touchSomething(event))
         this.on('collisionend', (event) => this.detachSomething(event))
+    }
+
+    onPreUpdate(_engine, _delta) {
+        super.onPreUpdate(_engine, _delta);
+        if(this.isRepaired) {
+            if (this.game.currentScene.button.buttonPushed) {
+                if (this.game.currentScene.fence.pos.y >= 650) {
+                    console.log('!');
+                    this.game.currentScene.fence.vel.y = 0;
+                } else {
+                    this.game.currentScene.fence.vel.y = 100;
+                }
+            } else {
+                if (this.game.currentScene.fence.pos.y <= 420) {
+                    this.game.currentScene.fence.vel.y = 0;
+                } else {
+                    this.game.currentScene.fence.vel.y = -100;
+                }
+            }
+        }
     }
 
 
@@ -58,6 +80,9 @@ export class Fusebox extends Actor {
             if (this.game.currentScene.player.inventory.hasItem('tool')) {
                 if (this.game.input.keyboard.isHeld(Input.Keys.E)) {
                     this.graphics.use('repaired')
+                    this.isRepaired = true;
+                    console.log(this.isRepaired);
+                    console.log(this.game.currentScene.button.buttonPushed);
                 }
             }
         }

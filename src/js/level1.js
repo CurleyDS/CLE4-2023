@@ -58,7 +58,7 @@ export class Level1 extends Scene {
         this.elevator = new Platform(Resources.MetalPlatform, 120, 50, 0.3, 0.3);
         this.add(this.elevator);
 
-        this.fence = new Fence(550,400)
+        this.fence = new Fence(540,420)
         this.add(this.fence);
 
     }

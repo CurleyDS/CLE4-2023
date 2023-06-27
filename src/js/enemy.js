@@ -3,6 +3,7 @@ import { Resources } from "./resources.js";
 import { Platform } from "./platform.js";
 import { View } from "./view.js";
 import { Pipes } from "./pipes.js";
+import { Fence } from "./fence.js";
 
 export class Enemy extends Actor {
     platformStart
@@ -55,7 +56,7 @@ export class Enemy extends Actor {
     }
 
     hitSomething(event) {
-        if (event.other instanceof Pipes) {
+        if (event.other instanceof Pipes || event.other instanceof Fence) {
             this.direction = !this.direction
         }
     }

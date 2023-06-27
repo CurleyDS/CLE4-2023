@@ -38,16 +38,12 @@ export class Button extends Actor {
         super.onPreUpdate(_engine, _delta);
         if(this.buttonPushed){
             if (this.game.currentScene.elevator.pos.y >= 300) {
-                console.log('platform stop')
-                console.log(this.game.currentScene.elevator.pos.y )
                 this.game.currentScene.elevator.vel.y = 0;
             } else {
                 this.game.currentScene.elevator.vel.y = 100;
             }
         } else {
             if (this.game.currentScene.elevator.pos.y <= 50) {
-                console.log('platform stop')
-                console.log(this.game.currentScene.elevator.pos.y )
                 this.game.currentScene.elevator.vel.y = 0;
             } else {
                 this.game.currentScene.elevator.vel.y = -100;

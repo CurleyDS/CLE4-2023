@@ -8,7 +8,7 @@ export class Fence extends Actor {
     y
 
     constructor(x = 0, y = 0) {
-        super({width: 500, height: 750});
+        super({width: Resources.MetalFence.width, height: Resources.MetalFence.height});
         this.sprite = Resources.MetalFence.toSprite()
         this.graphics.use(this.sprite);
 
