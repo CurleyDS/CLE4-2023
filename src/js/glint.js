@@ -32,52 +32,62 @@ export class Glint extends Actor {
         this.pos = new Vector(engine.currentScene.player.pos.x + 50, engine.currentScene.player.pos.y + 120)
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
+    }
 
-        this.info = new Label({
-            text: "Hi I'm Glint. You need to get out of here. I'll be your guide",
-            font: new Font({
-                unit: FontUnit.Px,
-                family: 'Arial',
-                size: 15,
-                color: Color.White,
-            }), pos: new Vector(this.pos.x + 30, this.pos.y -75)
-        })
-        engine.currentScene.add(this.info)
-        engine.clock.schedule(() => {
-            engine.currentScene.remove(this.info)
-        }, 5000)
+    idle() {
+        this.graphics.use('idle')
+        this.scale = new Vector(0.2, 0.2)
+        this.anchor = new Vector(0.5,2)
+    }
+
+    shocked() {
+        this.graphics.use('shocked')
+        this.scale = new Vector(0.2, 0.2)
+        this.anchor = new Vector(0.5,2)
+    }
+
+    sad1() {
+        this.graphics.use('sad1')
+        this.scale = new Vector(0.2, 0.2)
+        this.anchor = new Vector(0.5,2)
+    }
+
+    thinking() {
+        this.graphics.use('thinking')
+        this.scale = new Vector (0.35, 0.30);
+        this.anchor = new Vector(0.5,1.5)
+    }
+
+    angry() {
+        this.graphics.use('angry')
+        this.scale = new Vector (0.2, 0.2);
+        this.anchor = new Vector(0.5,2)
+    }
+
+    sad2() {
+        this.graphics.use('sad2')
+        this.scale = new Vector (0.20, 0.20)
+        this.anchor = new Vector(0.5,2)
     }
 
     onPreUpdate(engine) {
         if (engine.input.keyboard.isHeld(Input.Keys.Key1)) {
-            this.graphics.use('idle')
-            this.scale = new Vector(0.2, 0.2)
-            this.anchor = new Vector(0.5,2)
+            this.idle()
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key2)) {
-            this.graphics.use('shocked')
-            this.scale = new Vector(0.2, 0.2)
-            this.anchor = new Vector(0.5,2)
+            this.shocked()
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key3)) {
-            this.graphics.use('sad1')
-            this.scale = new Vector(0.2, 0.2)
-            this.anchor = new Vector(0.5,2)
+            this.sad1()
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key4)) {
-            this.graphics.use('thinking')
-            this.scale = new Vector (0.35, 0.30);
-            this.anchor = new Vector(0.5,1.5)
+            this.thinking()
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key5)) {
-            this.graphics.use('angry')
-            this.scale = new Vector (0.2, 0.2);
-            this.anchor = new Vector(0.5,2)
+            this.angry()
         }
         if (engine.input.keyboard.isHeld(Input.Keys.Key6)) {
-            this.graphics.use('sad2')
-            this.scale = new Vector (0.20, 0.20)
-            this.anchor = new Vector(0.5,2)
+            this.sad2()
         }
     }
 }

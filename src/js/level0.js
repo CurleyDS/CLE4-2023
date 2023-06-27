@@ -1,6 +1,7 @@
 import { Actor, Vector, Scene  } from 'excalibur'
 import { Resources } from './resources.js'
 import { Player } from "./player.js";
+import { HintObject } from "./hintobject.js";
 import { Glint } from "./glint.js";
 import { Item } from "./item.js";
 import { Background } from "./background.js";
@@ -62,6 +63,9 @@ export class Level0 extends Scene {
 
         this.player = new Player(60, 150);
         this.add(this.player);
+
+        this.hint = new HintObject(365, 150, "Looks like a narrow space.\n Try crouching [ctrl].");
+        this.add(this.hint);
 
         // this.inventory = this.player.inventory;
         // this.add(this.inventory);
