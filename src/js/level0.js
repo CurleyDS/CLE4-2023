@@ -45,7 +45,7 @@ export class Level0 extends Scene {
 
     onActivate(ctx) {
 
-        this.item = new Item("keys");
+        this.item = new Item("keys", Resources.Keys);
         this.add(this.item);
 
         this.enemy = new Enemy(250, 420);

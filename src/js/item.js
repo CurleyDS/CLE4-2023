@@ -1,5 +1,4 @@
 import { Actor, SpriteSheet, Vector, Input, Animation, range } from "excalibur";
-import { Resources } from "./resources.js";
 
 export class Item extends Actor {
     name
@@ -9,7 +8,7 @@ export class Item extends Actor {
     width
     height
 
-    constructor(name, amount=1, imageItem, rows, columns, width, height) {
+    constructor(name, imageItem, amount=1, rows, columns, width, height) {
         super({width: 300, height: imageItem.height});
 
         this.name = name
