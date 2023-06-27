@@ -1,15 +1,16 @@
-import { Actor, Engine, Vector, Color, Label, Font, FontUnit, CollisionType, FontStyle } from "excalibur"
+import { Actor, Engine, Vector, Color, Label, Font, FontUnit, TextAlign } from "excalibur"
 import { Player } from "./player.js"
 
 export class HintObject extends Actor {
     scaleNumber
     ogScale
     text
-    hint
     x
     y
+    hint
+    textAlign
 
-    constructor(x = 0, y = 0, text = "") {
+    constructor(x = 0, y = 0, text, textAlign = TextAlign.Left) {
         super({width: 500, height: 750})
         this.scaleNumber = 0.12
         this.scale = new Vector(this.scaleNumber, this.scaleNumber)
@@ -17,6 +18,7 @@ export class HintObject extends Actor {
         this.text = text
         this.x = x
         this.y = y
+        this.textAlign = textAlign
     }
 
     onInitialize(engine) {
@@ -32,7 +34,8 @@ export class HintObject extends Actor {
                 bold: true,
                 color: Color.White,
                 lineWidth: 10,
-                strokeColor: Color.Black
+                strokeColor: Color.Black,
+                textAlign: this.textAlign
             }),
             pos: new Vector(0, -((this.height * this.ogScale)))
         })
@@ -53,11 +56,9 @@ export class HintObject extends Actor {
 
     detachSomething(event) {
         if (event.other instanceof Player) {
-            this.game.clock.schedule(() => {
-                this.game.currentScene.glint.idle()
-                this.hint.text = ""
-                this.removeChild(this.hint)
-            }, 1000)
+            this.game.currentScene.glint.idle()
+            this.hint.text = ""
+            this.removeChild(this.hint)
         }
     }
 }
