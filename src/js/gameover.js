@@ -20,9 +20,7 @@ export class GameOver extends Scene {
         this.keys = _engine.input.keyboard
 
         if (this.keys.wasPressed(Input.Keys.Enter)) {
-
-            _engine.goToScene('level0')
-
+            _engine.goToScene(`level${this.game.currentLevel}`)
         }
     }
 }

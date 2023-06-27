@@ -64,6 +64,7 @@ export class Level1 extends Scene {
     }
 
     onActivate(ctx) {
+        this.game.currentLevel = 1
 
         this.tool = new Item("tool", 1, Resources.Tool, 1,  2, 250, 250, 100, 120)
         this.add(this.tool);
