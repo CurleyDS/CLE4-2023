@@ -7,6 +7,7 @@ import {GameOver} from "./gameover.js";
 import {Level1} from "./level1.js";
 
 export class Game extends Engine {
+    currentLevel
 
     constructor() {
         super({ width: 1200, height: 800 })
@@ -24,7 +25,7 @@ export class Game extends Engine {
         this.addScene('gameover', new GameOver())
 
 
-        this.goToScene('level1')
+        this.goToScene('level0')
     }
 }
 
