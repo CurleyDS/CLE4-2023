@@ -27,6 +27,7 @@ export class Box extends Actor {
         this.pos = new Vector(this.xpos, this.ypos)
     }
 
+    //makes draggable
     dragBox(event) {
         if (event.other instanceof Player) {
             if ((this.game.input.keyboard.isHeld(Input.Keys.E))) {
