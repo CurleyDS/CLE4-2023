@@ -33,7 +33,7 @@ export class Level0 extends Scene {
         this.platform2 = new Platform(Resources.Floor,330, 220, 1.02, 1.02);
         this.add(this.platform2);
 
-        this.pipe1 = new Pipes(Resources.Pipe1, 600, 61, 0.27, 0.27,0, 0, true, false);
+        this.pipe1 = new Pipes(Resources.Pipe1, 600, 59, 0.27, 0.27,0, 0, true, false);
         this.add(this.pipe1);
         this.pipe2 = new Pipes(Resources.Pipe2, 48, 455, 1.3, 1.3,-35, 0, false, false);
         this.add(this.pipe2);

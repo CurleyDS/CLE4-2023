@@ -24,47 +24,51 @@ export class Level1 extends Scene {
         this.background = new Background(Resources.Background1);
         this.add(this.background);
 
+        this.pipe5 = new Pipes(Resources.Pipe5, 425, 700, 1.3, 1.3,0, 0, false, true);
+        this.add(this.pipe5);
+        this.pipe6 = new Pipes(Resources.Pipe6, 1120, 700, 1.3, 1.3,-35, 0, false, true);
+        this.add(this.pipe6);
+        this.pipe7 = new Pipes(Resources.Pipe7, 755, 360, 1.3, 1.3,0, 0, true, false);
+        this.add(this.pipe7);
+        this.pipe8 = new Pipes(Resources.Pipe8, 1115, 350, 1.3, 1.5,0, 0, false, true);
+        this.add(this.pipe8);
+        this.pipe9 = new Pipes(Resources.Pipe9, 859, 478, 1.3, 1.3,0, 0, false, true);
+        this.add(this.pipe9);
+
         this.ground = new Platform(Resources.Floor, 601, 780, 1.02, 1.02);
         this.add(this.ground);
 
-        this.platform = new Platform(Resources.ShortPlatform, 800, 500, 0.2, 1.02);
+        this.platform = new Platform(Resources.ShortPlatform, 945, 520, 0.5, 1.02);
         this.add(this.platform);
 
-        // this.platform2 = new Platform(330, 220);
-        // this.add(this.platform2);
-        //
-        // this.platform3 = new Platform(330, 220);
-        // this.add(this.platform3);
-        //
-        // this.platform4 = new Platform(330, 220);
-        // this.add(this.platform4);
-        //
-        // this.platform5 = new Platform(330, 220);
-        // this.add(this.platform5);
+        this.platform2 = new Platform(Resources.ShortPlatform, 655, 520, 0.80, 1.02);
+        this.add(this.platform2);
 
-        this.pipe5 = new Pipes(Resources.Pipe5, 425, 700, 1.3, 1.3,0, 0, false, true);
-        this.add(this.pipe5);
-        // this.pipe6 = new Pipes(Resources.Pipe6, 48, 455, 1.3, 1.3,-35, 0, false, false);
-        // this.add(this.pipe6);
-        // this.pipe7 = new Pipes(Resources.Pipe7, 87, 700, 1.3, 1.3,0, 0, false, true);
-        // this.add(this.pipe7);
-        // this.pipe8 = new Pipes(Resources.Pipe8, 1107, 415, 1.5, 1.5,0, 0, false, true);
-        // this.add(this.pipe8);
+        this.platform3 = new Platform(Resources.Floor, 625, 300, 0.4, 1.02);
+        this.add(this.platform3);
+
+        this.platform4 = new Platform(Resources.ShortPlatform, 100, 520, 0.75, 1.02);
+        this.add(this.platform4);
+
+        this.platform5 = new Platform(Resources.ShortPlatform, 100, 25, 0.75, 1.02);
+        this.add(this.platform5);
+
+
     }
 
     onActivate(ctx) {
 
-        // this.item = new Item("keys");
-        // this.add(this.item);
-        //
-        // this.enemy = new Enemy(250, 420);
-        // this.add(this.enemy);
-        //
-        // this.barrel = new Barrel(600, 440);
-        // this.add(this.barrel);
-        //
-        // this.door = new Door(1050, 685);
-        // this.add(this.door);
+        this.item = new Item("keys");
+        this.add(this.item);
+
+        this.barrel = new Barrel(775, 717);
+        this.add(this.barrel);
+
+        this.door = new Door(600, 685);
+        this.add(this.door);
+
+        this.enemy = new Enemy(800, 680);
+        this.add(this.enemy);
 
         this.glint = new Glint()
         this.add(this.glint);
@@ -72,8 +76,8 @@ export class Level1 extends Scene {
         this.player = new Player(60, 150);
         this.add(this.player);
 
-        // this.inventory = this.player.inventory;
-        // this.add(this.inventory);
+        this.inventory = this.player.inventory;
+        this.add(this.inventory);
 
     }
 

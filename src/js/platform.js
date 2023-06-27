@@ -9,7 +9,7 @@ export class Platform extends Actor {
     platformImage
 
     constructor(platformImage, x = 0, y = 0, xS, yS){
-        super({ width: Resources.Floor.width, height: Resources.Floor.height})
+        super({ width: platformImage.width, height: platformImage.height})
         this.body.collisionType = CollisionType.Fixed
         this.platformImage = platformImage;
         this.x = x
@@ -22,8 +22,6 @@ export class Platform extends Actor {
         if(this.platformImage instanceof ImageSource) {
             this.graphics.use(this.platformImage.toSprite())
         }
-        const floorImage = Resources.Floor.toSprite()
-        this.graphics.use(floorImage);
         this.scale = new Vector(this.xS, this.yS)
         this.pos = new Vector(this.x, this.y)
     }
