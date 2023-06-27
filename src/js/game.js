@@ -4,7 +4,7 @@ import { ResourceLoader } from './resources.js'
 // import { Play } from "./play.js";
 import {Level0} from "./level0.js";
 import {GameOver} from "./gameover.js";
-import {StartGame} from "./startgame.js";
+import {Level1} from "./level1.js";
 
 export class Game extends Engine {
 
@@ -13,13 +13,14 @@ export class Game extends Engine {
         // this.showDebug(true)
         // this.debug.transform.showAll = true
         Physics.useArcadePhysics()
-        Physics.gravity = new Vector(0, 800)
+        // Physics.useRealisticPhysics()
+        Physics.gravity = new Vector( 0, 800)
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
     startGame() {
-        // this.addScene('startgame', new StartGame)
         this.addScene('level0', new Level0())
+        this.addScene('level1', new Level1())
         this.addScene('gameover', new GameOver())
 
 

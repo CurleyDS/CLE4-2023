@@ -24,16 +24,16 @@ export class Level0 extends Scene {
         this.background = new Background(Resources.Background0);
         this.add(this.background);
 
-        this.ground = new Platform(600, 780);
+        this.ground = new Platform(Resources.Floor, 600, 780, 1.02, 1.02);
         this.add(this.ground);
 
-        this.platform = new Platform(800, 500);
+        this.platform = new Platform(Resources.Floor, 800, 500, 1.02, 1.02);
         this.add(this.platform);
 
-        this.platform2 = new Platform(330, 220);
+        this.platform2 = new Platform(Resources.Floor,330, 220, 1.02, 1.02);
         this.add(this.platform2);
 
-        this.pipe1 = new Pipes(Resources.Pipe1, 600, 61, 0.27, 0.27,0, 0, true, false);
+        this.pipe1 = new Pipes(Resources.Pipe1, 600, 59, 0.27, 0.27,0, 0, true, false);
         this.add(this.pipe1);
         this.pipe2 = new Pipes(Resources.Pipe2, 48, 455, 1.3, 1.3,-35, 0, false, false);
         this.add(this.pipe2);
@@ -45,7 +45,7 @@ export class Level0 extends Scene {
 
     onActivate(ctx) {
 
-        this.item = new Item("keys");
+        this.item = new Item("keys", Resources.Keys);
         this.add(this.item);
 
         this.enemy = new Enemy(250, 420);
