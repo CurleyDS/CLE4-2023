@@ -9,7 +9,6 @@ import {
 } from "excalibur";
 import {Resources} from "./resources.js";
 import {Player} from './player.js'
-import {HintObject} from "./hintobject.js";
 
 export class Box extends Actor {
     platformStart

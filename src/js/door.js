@@ -3,9 +3,11 @@ import {Resources} from "./resources.js";
 import {Player} from "./player.js";
 
 export class Door extends Actor {
+    level
 
-    constructor(x, y) {
+    constructor(x, y, level = 'levelselect') {
         super({width: 500, height: 500});
+        this.level = level
 
         const doorSheet = SpriteSheet.fromImageSource({
             image: Resources.Door,
@@ -25,6 +27,7 @@ export class Door extends Actor {
     onInitialize(engine) {
         this.game = engine;
         this.graphics.use('closed')
+        console.log(this.game.currentLevel)
 
         this.on('precollision', (event) => this.touchSomething(event))
     }
@@ -36,7 +39,7 @@ export class Door extends Actor {
                 if (this.game.input.keyboard.isHeld(Input.Keys.E)) {
                     this.graphics.use('open')
                     this.game.clock.schedule(() => {
-                        this.game.goToScene('level1');
+                        this.game.goToScene(this.level)
                     }, 1000)
                 }
             }

@@ -79,7 +79,7 @@ export class Level1 extends Scene {
         this.button = new Button(100, 725);
         this.add(this.button);
 
-        this.door = new Door(600, 685);
+        this.door = new Door(600, 685, 'gamewin');
         this.add(this.door);
 
         this.fusebox = new Fusebox(1125, 580);

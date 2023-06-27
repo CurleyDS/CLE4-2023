@@ -56,7 +56,7 @@ export class Level0 extends Scene {
         this.barrel = new Barrel(600, 435);
         this.add(this.barrel);
 
-        this.door = new Door(1050, 680);
+        this.door = new Door(1050, 680, 'level1');
         this.add(this.door);
 
         this.glint = new Glint(50, 100)

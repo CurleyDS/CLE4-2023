@@ -34,6 +34,29 @@ export class Button extends Actor {
         this.graphics.add("pushed", pushed);
     }
 
+    onInitialize(engine) {
+        this.game =engine;
+        this.graphics.use('notpushed')
+
+        this.on('precollision', (event) => this.pushed(event))
+        this.on('collisionend', (event) => this.notPushed(event))
+    }
+
+    pushed(event) {
+        if (event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) {
+            this.graphics.use('pushed')
+                this.buttonPushed = true;
+
+        }
+    }
+
+    notPushed(event) {
+        if (event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) {
+            this.graphics.use('notpushed')
+            this.buttonPushed = false;
+        }
+    }
+
     onPreUpdate(_engine, _delta) {
         super.onPreUpdate(_engine, _delta);
         if(this.buttonPushed){
@@ -48,29 +71,6 @@ export class Button extends Actor {
             } else {
                 this.game.currentScene.elevator.vel.y = -100;
             }
-        }
-    }
-
-    onInitialize(engine) {
-        this.game =engine;
-        this.graphics.use('notpushed')
-
-        this.on('collisionstart', (event) => this.pushed(event))
-        this.on('collisionend', (event) => this.notPushed(event))
-    }
-
-    pushed(event) {
-        if (event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) {
-            this.graphics.use('pushed')
-                this.buttonPushed = true;
-
-        }
-    }
-
-    notPushed(event) {
-        if ((event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) || (event.other instanceof Box && event.other instanceof Player)) {
-            this.graphics.use('notpushed')
-            this.buttonPushed = false;
         }
     }
 }

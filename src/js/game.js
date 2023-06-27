@@ -2,9 +2,11 @@ import '../css/style.css'
 import { Engine, Vector, Physics } from "excalibur"
 import { ResourceLoader } from './resources.js'
 // import { Play } from "./play.js";
-import {Level0} from "./level0.js";
-import {GameOver} from "./gameover.js";
-import {Level1} from "./level1.js";
+import { LevelSelect } from "./levelselect.js";
+import { Level0 } from "./level0.js";
+import { Level1 } from "./level1.js";
+import { GameOver } from "./gameover.js";
+import { GameWin } from "./gamewin.js";
 
 export class Game extends Engine {
     currentLevel
@@ -20,12 +22,13 @@ export class Game extends Engine {
     }
 
     startGame() {
+        this.addScene('levelselect', new LevelSelect())
         this.addScene('level0', new Level0())
         this.addScene('level1', new Level1())
         this.addScene('gameover', new GameOver())
+        this.addScene('gamewin', new GameWin())
 
-
-        this.goToScene('level1')
+        this.goToScene('levelselect')
     }
 }
 

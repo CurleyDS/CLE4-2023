@@ -3,11 +3,11 @@ import { Resources } from "./resources.js";
 import { Platform } from "./platform.js";
 import { Inventory } from "./inventory.js"
 import { Item } from "./item.js"
+import { Box } from "./box.js"
 import { Barrel } from "./barrel.js"
 import { Enemy } from "./enemy.js"
-import {StandingupCollider} from "./standingupcollider.js";
-import {Pipes} from "./pipes.js";
-
+import { StandingupCollider } from "./standingupcollider.js";
+import { Pipes } from "./pipes.js";
 
 export class Player extends Actor {
     game
@@ -89,7 +89,7 @@ export class Player extends Actor {
     }
 
     touchSomething(event) {
-        if (event.other instanceof Platform || (event.other instanceof Pipes && event.other.platform) ) {
+        if (event.other instanceof Platform || event.other instanceof Box || (event.other instanceof Pipes && event.other.platform) ) {
             this.grounded = true
             this.jumped = false
         }
@@ -115,7 +115,7 @@ export class Player extends Actor {
 
     detachSomething(event) {
         // wanneer de speler stopt met iets aanraken
-        if (event.other instanceof Platform || event.other instanceof Pipes) {
+        if (event.other instanceof Platform || event.other instanceof Box || event.other instanceof Pipes) {
             this.jumped = true
             this.game.clock.schedule(() => {
                 this.grounded = false

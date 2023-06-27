@@ -22,6 +22,7 @@ import enemy from '../images/enemy-spritesheet.png'
 import view from '../images/detection;zone.png'
 import keys from '../images/keys-spritesheet.png'
 import door from '../images/door-spritesheet.png'
+import gamewin from '../images/win;screen.png'
 import gameover from '../images/game-over.png'
 import startgame from '../images/title;start.png'
 import barrel1 from '../images/barrel-normal.png'
@@ -32,9 +33,6 @@ import tool from '../images/watchamacallit;thingy;spritesheet.png'
 import button from '../images/big;red;button;spritesheet.png'
 import metalPlatform from '../images/a;grey;box;with;screws.png'
 import metalFence from '../images/a;grey;bar;with;screws;on;the;side.png'
-
-
-
 
 const Resources = {
     Background: new ImageSource(background),
@@ -58,6 +56,7 @@ const Resources = {
     View: new ImageSource(view),
     Keys: new ImageSource(keys),
     Door: new ImageSource(door),
+    GameWin: new ImageSource(gamewin),
     GameOver: new ImageSource(gameover),
     StartGame: new ImageSource(startgame),
     Barrel1: new ImageSource(barrel1),
@@ -90,6 +89,7 @@ const ResourceLoader = new Loader([
     Resources.Enemy,
     Resources.View,
     Resources.Door,
+    Resources.GameWin,
     Resources.GameOver,
     Resources.StartGame,
     Resources.Barrel1,
