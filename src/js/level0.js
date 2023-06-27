@@ -57,7 +57,7 @@ export class Level0 extends Scene {
         this.door = new Door(1050, 685);
         this.add(this.door);
 
-        this.glint = new Glint()
+        this.glint = new Glint(50, 100)
         this.add(this.glint);
 
         this.player = new Player(60, 150);

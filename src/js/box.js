@@ -1,4 +1,4 @@
-import {Actor, Vector, Label, Font, FontUnit, Color, CollisionType} from "excalibur";
+import {Actor, Vector, CollisionType} from "excalibur";
 import { Resources } from "./resources.js";
 
 export class Box extends Actor {
@@ -11,7 +11,6 @@ export class Box extends Actor {
 
         this.sprite = Resources.Box1.toSprite()
         this.body.collisionType = CollisionType.Active
-        this.body.useGravity = true
     }
 
     onInitialize(_engine) {
@@ -19,6 +18,7 @@ export class Box extends Actor {
 
         this.graphics.use(this.sprite)
         this.pos = new Vector(this.xpos, this.ypos)
+        this.scale = new Vector( 0.2, 0.2)
     }
 
 }

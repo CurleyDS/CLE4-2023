@@ -24,12 +24,12 @@ export class Item extends Actor {
         this.x = x
         this.y = y
 
-        this.pos = new Vector(x,y)
+        this.pos = new Vector(this.x,this.y)
         this.scale = new Vector( 0.25, 0.25)
 
         const sparkleSheet = SpriteSheet.fromImageSource({
             image: imageItem,
-            grid: {rows: 1, columns: 2, spriteWidth: 250, spriteHeight: 281},
+            grid: {rows: this.rows, columns: this.columns, spriteWidth: this.width, spriteHeight: this.height},
         });
 
         const sparkle = Animation.fromSpriteSheet(sparkleSheet, range(0, 1), 200);

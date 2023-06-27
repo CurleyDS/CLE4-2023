@@ -3,7 +3,10 @@ import { Resources } from "./resources.js";
 
 export class Glint extends Actor {
 
-    constructor() {
+    x
+    y
+
+    constructor(x,y) {
         super({width: 250, height: 250})
         // de player heeft zelf de hele spritesheet omdat er maar 1 player is
         this.scale = new Vector(0.2, 0.2)
@@ -25,11 +28,14 @@ export class Glint extends Actor {
         this.graphics.add("sad2", sad2);
         this.graphics.add("thinking", thinking);
         this.graphics.add("angry", angry);
+
+        this.x = x;
+        this.y=y;
     }
 
     onInitialize(engine) {
         this.graphics.use("idle");
-        this.pos = new Vector(engine.currentScene.player.pos.x + 50, engine.currentScene.player.pos.y + 120)
+        this.pos = new Vector(this.x, this.y)
         this.anchor = new Vector(0.5,2)
         this.actions.follow(engine.currentScene.player, 100)
 

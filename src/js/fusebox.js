@@ -2,29 +2,29 @@ import { Actor, Vector, Label, Font, FontUnit, Color, CollisionType, SpriteSheet
 import {Resources} from "./resources.js";
 import {Player} from "./player.js";
 
-export class Door extends Actor {
+export class Fusebox extends Actor {
 
     constructor(x, y) {
         super({width: 500, height: 500});
 
-        const doorSheet = SpriteSheet.fromImageSource({
-            image: Resources.Door,
-            grid: {rows: 3, columns: 3, spriteWidth: 500, spriteHeight: 500},
+        const fuseboxsheet = SpriteSheet.fromImageSource({
+            image: Resources.Fusebox,
+            grid: {rows: 1, columns: 4, spriteWidth: 500, spriteHeight: 500},
         });
 
-        const open = Animation.fromSpriteSheet(doorSheet, range(0, 4), 200);
-        const closed = doorSheet.sprites[0]
+        const broken = Animation.fromSpriteSheet(fuseboxsheet, range(1, 3), 200);
+        const repaired = fuseboxsheet.sprites[0]
 
-        this.graphics.add("open", open);
-        this.graphics.add("closed", closed);
+        this.graphics.add("broken", broken);
+        this.graphics.add("repaired", repaired);
 
         this.pos = new Vector(x, y)
-        this.scale = new Vector(0.3, 0.3)
+        this.scale = new Vector(0.25, 0.25)
     }
 
     onInitialize(engine) {
         this.game = engine;
-        this.graphics.use('closed')
+        this.graphics.use('broken')
 
         this.on('collisionstart', (event) => this.inFrontOfSomething(event))
         this.on('precollision', (event) => this.touchSomething(event))
@@ -38,8 +38,8 @@ export class Door extends Actor {
             this.game.currentScene.glint.graphics.use('thinking')
             this.game.currentScene.glint.scale = new Vector(0.35, 0.30);
             this.game.currentScene.glint.anchor = new Vector(0.5, 1.5);
-            this.infoDoor = new Label({
-                text: 'Hmmm... seems like you need a key for this',
+            this.infoFusebox = new Label({
+                text: 'Looks like this needs to be fixed',
                 font: new Font({
                     unit: FontUnit.Px,
                     family: 'Arial',
@@ -48,19 +48,16 @@ export class Door extends Actor {
                 }), pos: new Vector(this.game.currentScene.glint.pos.x - 275, this.game.currentScene.glint.pos.y - 50)
             })
 
-            this.game.currentScene.add(this.infoDoor)
+            this.game.currentScene.add(this.infoFusebox)
         }
     }
 
     touchSomething(event) {
         // wanneer de speler iets aanraakt
         if (event.other instanceof Player) {
-            if (this.game.currentScene.player.inventory.hasItem('keys')) {
+            if (this.game.currentScene.player.inventory.hasItem('tool')) {
                 if (this.game.input.keyboard.isHeld(Input.Keys.E)) {
-                    this.graphics.use('open')
-                    this.game.clock.schedule(() => {
-                        this.game.goToScene('level1');
-                    }, 1000)
+                    this.graphics.use('repaired')
                 }
             }
         }
@@ -68,7 +65,7 @@ export class Door extends Actor {
 
     detachSomething(event) {
         if (event.other instanceof Player) {
-            this.game.currentScene.remove(this.infoDoor);
+            this.game.currentScene.remove(this.infoFusebox);
             this.game.currentScene.glint.graphics.use('idle')
             this.game.currentScene.glint.scale = new Vector(0.2, 0.2);
             this.game.currentScene.glint.anchor = new Vector(0.5, 2)
