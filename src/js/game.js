@@ -24,7 +24,7 @@ export class Game extends Engine {
         this.addScene('gameover', new GameOver())
 
 
-        this.goToScene('level0')
+        this.goToScene('level1')
     }
 }
 

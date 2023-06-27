@@ -58,7 +58,10 @@ export class Level1 extends Scene {
 
     onActivate(ctx) {
 
-        this.item = new Item("keys");
+        // this.item = new Item("tool", 1, Resources.Tool, 1,  2, 250, 281)
+        // this.add(this.item);
+
+        this.item = new Item("keys", 1, Resources.Keys, 1,  2, 250, 281, 700, 450)
         this.add(this.item);
 
         this.barrel = new Barrel(775, 717);
@@ -76,8 +79,8 @@ export class Level1 extends Scene {
         this.player = new Player(60, 150);
         this.add(this.player);
 
-        this.inventory = this.player.inventory;
-        this.add(this.inventory);
+        // this.inventory = this.player.inventory;
+        // this.add(this.inventory);
 
     }
 

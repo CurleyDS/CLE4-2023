@@ -8,15 +8,23 @@ export class Item extends Actor {
     columns
     width
     height
+    x
+    y
 
-    constructor(name, amount=1, imageItem, rows, columns, width, height) {
+    constructor(name, amount=1, imageItem, rows, columns, width, height, x, y) {
         super({width: 300, height: imageItem.height});
 
         this.name = name
         this.amount = amount
         this.imageItem = imageItem
+        this.rows = rows
+        this.columns = columns
+        this.width = width
+        this.height = height
+        this.x = x
+        this.y = y
 
-        this.pos = new Vector(320, 360)
+        this.pos = new Vector(x,y)
         this.scale = new Vector( 0.25, 0.25)
 
         const sparkleSheet = SpriteSheet.fromImageSource({
