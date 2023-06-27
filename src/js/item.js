@@ -3,18 +3,24 @@ import { Resources } from "./resources.js";
 
 export class Item extends Actor {
     name
+    imageItem
+    rows
+    columns
+    width
+    height
 
-    constructor(name, amount=1) {
-        super({width: 300, height: Resources.Keys.height});
+    constructor(name, amount=1, imageItem, rows, columns, width, height) {
+        super({width: 300, height: imageItem.height});
 
         this.name = name
         this.amount = amount
+        this.imageItem = imageItem
 
         this.pos = new Vector(320, 360)
         this.scale = new Vector( 0.25, 0.25)
 
         const sparkleSheet = SpriteSheet.fromImageSource({
-            image: Resources.Keys,
+            image: imageItem,
             grid: {rows: 1, columns: 2, spriteWidth: 250, spriteHeight: 281},
         });
 
@@ -23,7 +29,6 @@ export class Item extends Actor {
     }
 
     onInitialize(engine) {
-        this.sprite = Resources.Keys.toSprite()
         this.graphics.use('sparkle')
     }
 }
