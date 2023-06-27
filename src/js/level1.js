@@ -30,7 +30,7 @@ export class Level1 extends Scene {
 
         this.pipe5 = new Pipes(Resources.Pipe5, 425, 700, 1.3, 1.3,0, 0, false, true);
         this.add(this.pipe5);
-        this.pipe6 = new Pipes(Resources.Pipe6, 1120, 700, 1.3, 1.3,0, 0, false, true);
+        this.pipe6 = new Pipes(Resources.Pipe6, 1120, 705, 1.3, 1.3,0, 0, false, true);
         this.add(this.pipe6);
         this.pipe7 = new Pipes(Resources.Pipe7, 755, 365, 1.3, 1.3,0, 0, true, false);
         this.add(this.pipe7);
@@ -54,7 +54,7 @@ export class Level1 extends Scene {
         this.platform4 = new Platform(Resources.ShortPlatform, 50, 520, 0.75, 1.02);
         this.add(this.platform4);
 
-        this.platform5 = new Platform(Resources.ShortPlatform, 100, 25, 0.75, 1.02);
+        this.platform5 = new Platform(Resources.ShortPlatform, 100, 50, 0.75, 1.02);
         this.add(this.platform5);
 
 
@@ -62,7 +62,7 @@ export class Level1 extends Scene {
 
     onActivate(ctx) {
 
-        this.tool = new Item("tool", 1, Resources.Tool, 1,  2, 250, 250, 100, 100)
+        this.tool = new Item("tool", 1, Resources.Tool, 1,  2, 250, 250, 100, 120)
         this.add(this.tool);
 
         this.keys = new Item("keys", 1, Resources.Keys, 1,  2, 250, 281, 700, 450)
@@ -100,6 +100,7 @@ export class Level1 extends Scene {
     onDeactivate(_context) {
         super.onDeactivate(_context);
         this.keys.kill()
+        this.box.kill()
         this.tool.kill()
         this.fusebox.kill()
         this.enemy.kill()

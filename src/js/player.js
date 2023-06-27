@@ -86,8 +86,6 @@ export class Player extends Actor {
                 this.game.goToScene('gameover');
             }
         }
-
-
     }
 
     touchSomething(event) {

@@ -1,8 +1,23 @@
-import {Actor, Vector, CollisionType, Input} from "excalibur";
-import { Resources } from "./resources.js";
-import {Player} from "./player.js";
+import {
+    Actor
+    ,
+    Vector
+    ,
+    Input
+    ,
+    CollisionType
+} from "excalibur";
+import {Resources} from "./resources.js";
+import {Player} from './player.js'
 
 export class Box extends Actor {
+    platformStart
+    platformEnd
+    platformPosition
+    direction
+    aggro
+    x
+    y
 
     constructor(xpos, ypos) {
         super({width: Resources.Box1.width, height: Resources.Box1.height});
@@ -15,6 +30,7 @@ export class Box extends Actor {
         this.body.useGravity = true
 
         this.scale = new Vector(0.2, 0.2)
+
     }
 
     onInitialize(_engine) {
@@ -27,11 +43,10 @@ export class Box extends Actor {
         this.pos = new Vector(this.xpos, this.ypos)
     }
 
-    //makes draggable
     dragBox(event) {
         if (event.other instanceof Player) {
             if ((this.game.input.keyboard.isHeld(Input.Keys.E))) {
-                this.actions.follow(this.game.currentScene.player, 100)
+                this.actions.follow(this.game.currentScene.player, 10)
             } else {
                 this.actions.clearActions()
             }
