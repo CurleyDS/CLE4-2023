@@ -1,27 +1,26 @@
 import {Actor, CollisionType, ImageSource, Vector} from 'excalibur'
-import { Resources } from './resources.js'
 
 export class Pipes extends Actor {
     pipeImage;
     lowhanging;
     platform
-    xP
-    yP
-    xS
-    yS
-    xC
-    yC
+    x
+    y
+    sWidth
+    sHeight
+    cWidth
+    cHeight
 
-    constructor(pipeImage, xP, yP, xS, yS, xC, yC, lowhanging = false, platform = true) {
-        super({width: pipeImage.width + xC, height: pipeImage.height + yC});
+    constructor(pipeImage, x, y, sWidth, sHeight, cWidth, cHeight, lowhanging = false, platform = true) {
+        super({width: pipeImage.width + cWidth, height: pipeImage.height + cHeight});
         this.body.collisionType = CollisionType.Fixed
         this.pipeImage = pipeImage;
-        this.xP = xP;
-        this.yP = yP;
-        this.xS = xS;
-        this.yS = yS;
-        this.xC = xC;
-        this.yC = yC;
+        this.x = x;
+        this.y = y;
+        this.sWidth = sWidth;
+        this.sHeight = sHeight;
+        this.cWidth = cWidth;
+        this.cHeight = cHeight;
         this.lowhanging = lowhanging;
         this.platform = platform;
     }
@@ -30,7 +29,7 @@ export class Pipes extends Actor {
         if(this.pipeImage instanceof ImageSource) {
             this.graphics.use(this.pipeImage.toSprite())
         }
-        this.pos = new Vector(this.xP, this.yP)
-        this.scale = new Vector(this.xS, this.yS)
+        this.pos = new Vector(this.x, this.y)
+        this.scale = new Vector(this.sWidth, this.sHeight)
     }
 }
