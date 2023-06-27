@@ -37,7 +37,7 @@ export class Button extends Actor {
     onPreUpdate(_engine, _delta) {
         super.onPreUpdate(_engine, _delta);
         if(this.buttonPushed){
-            if (this.game.currentScene.elevator.pos.y >= 300) {
+            if (this.game.currentScene.elevator.pos.y >= 280) {
                 this.game.currentScene.elevator.vel.y = 0;
             } else {
                 this.game.currentScene.elevator.vel.y = 100;
@@ -68,7 +68,7 @@ export class Button extends Actor {
     }
 
     notPushed(event) {
-        if (event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) {
+        if ((event.other instanceof Box || event.other instanceof Player || event.other instanceof Enemy) || (event.other instanceof Box && event.other instanceof Player)) {
             this.graphics.use('notpushed')
             this.buttonPushed = false;
         }

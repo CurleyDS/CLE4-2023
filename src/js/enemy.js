@@ -15,7 +15,7 @@ export class Enemy extends Actor {
     y
 
     constructor(x = 0, y = 0) {
-        super({width: 500, height: 750});
+        super({width: 450, height: 750});
         this.platformPosition = 0
         this.direction = true
         this.aggro = false

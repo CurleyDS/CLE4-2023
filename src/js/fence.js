@@ -13,7 +13,7 @@ export class Fence extends Actor {
         this.graphics.use(this.sprite);
 
         this.pos = new Vector(x, y)
-        this.scale = new Vector(0.3, 0.3)
+        this.scale = new Vector(0.3, 0.35)
         this.body.collisionType = CollisionType.Fixed
     }
 }

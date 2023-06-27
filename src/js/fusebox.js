@@ -37,7 +37,7 @@ export class Fusebox extends Actor {
         super.onPreUpdate(_engine, _delta);
         if(this.isRepaired) {
             if (this.game.currentScene.button.buttonPushed) {
-                if (this.game.currentScene.fence.pos.y >= 650) {
+                if (this.game.currentScene.fence.pos.y >= 670) {
                     console.log('!');
                     this.game.currentScene.fence.vel.y = 0;
                 } else {
@@ -60,17 +60,6 @@ export class Fusebox extends Actor {
             this.game.currentScene.glint.graphics.use('thinking')
             this.game.currentScene.glint.scale = new Vector(0.35, 0.30);
             this.game.currentScene.glint.anchor = new Vector(0.5, 1.5);
-            this.infoFusebox = new Label({
-                text: 'Looks like this needs to be fixed',
-                font: new Font({
-                    unit: FontUnit.Px,
-                    family: 'Arial',
-                    size: 15,
-                    color: Color.White,
-                }), pos: new Vector(this.game.currentScene.glint.pos.x - 275, this.game.currentScene.glint.pos.y - 50)
-            })
-
-            this.game.currentScene.add(this.infoFusebox)
         }
     }
 
@@ -90,7 +79,6 @@ export class Fusebox extends Actor {
 
     detachSomething(event) {
         if (event.other instanceof Player) {
-            this.game.currentScene.remove(this.infoFusebox);
             this.game.currentScene.glint.graphics.use('idle')
             this.game.currentScene.glint.scale = new Vector(0.2, 0.2);
             this.game.currentScene.glint.anchor = new Vector(0.5, 2)

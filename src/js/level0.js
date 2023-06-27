@@ -77,7 +77,7 @@ export class Level0 extends Scene {
         this.hint4 = new HintObject(365, 430, "Might need this for later...");
         this.add(this.hint4);
 
-        this.hint5 = new HintObject(1005, 710, "Maybe it'll open [E] it with a key?", TextAlign.Right);
+        this.hint5 = new HintObject(1005, 710, "Maybe it'll open [E] with a key?", TextAlign.Right);
         this.add(this.hint5);
 
         // this.inventory = this.player.inventory;
