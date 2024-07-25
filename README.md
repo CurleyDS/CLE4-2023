@@ -1,4 +1,4 @@
-[Link naar de game.](https://curleyds.github.io/CLE4-2022-2023/)
+[Link naar de game.](https://curleyds.github.io/projects/CLE4-2022-2023/)
 
 # CLE4 Project 2023
 
